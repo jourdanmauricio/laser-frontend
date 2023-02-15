@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "prod": "pm2 start npm --name 'laser-frontend' -- start -p 3006",
+    "build": "next build -p 3006",
+    "start": "next start -p 3006",
+    "prod": "pm2 start npm --name 'laser-frontend' -- start",
     "lint": "next lint"
   },
   "dependencies": {
