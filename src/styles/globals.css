@@ -21,15 +21,31 @@ body {
   background-color: var(--background-color);
 }
 
-h1,
+/* h1,
 h2,
 h3 {
   font-family: var(--quicksand-font);
-}
+} */
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+
+  h4 {
+    @apply text-base;
+  }
 }
 
 /****************/
@@ -95,19 +111,19 @@ a {
     @apply bg-transparent px-0 py-4 rounded;
   } */
   /*   TITLE   */
-  /* .title {
-    @apply text-2xl text-center mt-6 font-semibold text-titleColor;
-  } */
+  .title {
+    @apply text-center mt-6 font-semibold text-teal-600;
+  }
 
   /*   PARAGRAPH   */
-  /* .paragraph {
-    @apply text-center leading-8 font-normal mt-6 mb-5 text-xl text-paragraphColor;
-  } */
+  .paragraph {
+    @apply text-center leading-8 font-normal mt-6 mb-5 text-xl text-gray-900;
+  }
 
   /*   BUTTON   */
-  /* .button__cta {
-    @apply block my-8 mx-auto w-[280px] rounded bg-buttonColor text-slate-200 px-[5px] py-2 uppercase text-lg border-2 border-solid border-transparent ease-in-out duration-300 no-underline hover:bg-transparent hover:border-buttonColor hover:text-buttonColor;
-  } */
+  .button__cta {
+    @apply block my-8 mx-auto w-[280px] rounded bg-teal-500 text-slate-200 px-[5px] py-2 uppercase text-lg border-2 border-solid border-transparent ease-in-out duration-300 no-underline hover:bg-transparent hover:border-teal-500 hover:text-teal-500;
+  }
 
   /*   FORM   */
   /* .form__group {

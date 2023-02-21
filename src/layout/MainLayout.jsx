@@ -53,7 +53,7 @@ const MainLayout = ({ children }) => {
           <link rel="icon" type="image/png" href="/favicon.png"></link>
         </Head>
         <Nav />
-        <Hero />
+        {/* <Hero /> */}
         <main>{children}</main>
       </div>
     </>

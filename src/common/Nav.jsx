@@ -44,12 +44,10 @@ const Nav = () => {
           <ul className="menu__ul">
             <li
               className={`menu__link ${
-                router.asPath == '/#inicio'
-                  ? 'border-buttonColor'
-                  : 'border-slate-200'
+                router.asPath == '/' ? 'border-teal-500' : 'border-slate-200'
               }`}
             >
-              <Link className="menu__item" href="#inicio" scroll={false}>
+              <Link className="menu__item" href="/" scroll={false}>
                 Inicio
               </Link>
             </li>
@@ -78,12 +76,12 @@ const Nav = () => {
             </li>
             <li
               className={`menu__link ${
-                router.asPath == '/#lessons'
-                  ? 'border-buttonColor'
+                router.asPath == '/blog'
+                  ? 'border-teal-500'
                   : 'border-slate-200'
               }`}
             >
-              <Link className="menu__item" href="#lessons" scroll={false}>
+              <Link className="menu__item" href="/blog" scroll={false}>
                 Blog
               </Link>
             </li>

@@ -1,11 +1,6 @@
-// import '@/styles/globals.css'
-
-// export default function App({ Component, pageProps }) {
-//   return <Component {...pageProps} />
-// }
-
 import MainLayout from '@/layout/MainLayout';
 import '@/styles/globals.css';
+import '@/styles/quill.snow.css';
 
 import { Raleway, Quicksand } from '@next/font/google';
 
