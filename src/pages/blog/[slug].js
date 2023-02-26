@@ -1,30 +1,35 @@
 import axios from 'axios';
 import Image from 'next/image';
 import Author from '../../components/Author';
+import Nav from '../../common/Nav';
 
-const Slug = ({ post }) => {
+const Slug = ({ post, settings }) => {
+  const logo = settings.find((setting) => setting.feature === 'logo');
   return (
-    <div className="p-10">
-      <h1 className="title">{post.title} </h1>
+    <>
+      <Nav logo={logo} />
+      <div className="p-10">
+        <h1 className="title">{post.title} </h1>
 
-      <div className="mt-10 min-h-[50vh] font-normal text-base border-gray-500 w-full">
-        <div className="float-none md:float-left md:pr-10 md:pb-10">
-          <Image
-            className="mx-auto"
-            src={post.image}
-            width={400}
-            height={400}
-            alt={post.alt_image}
+        <div className="mt-10 min-h-[50vh] font-normal text-base border-gray-500 w-full">
+          <div className="float-none md:float-left md:pr-10 md:pb-10">
+            <Image
+              className="mx-auto"
+              src={post.image}
+              width={400}
+              height={400}
+              alt={post.alt_image}
+            />
+          </div>
+
+          <div
+            className="relative ql-editor"
+            dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>
-
-        <div
-          className="relative ql-editor"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
+        <Author post={post} />
       </div>
-      <Author post={post} />
-    </div>
+    </>
   );
 };
 
@@ -40,15 +45,18 @@ export const getStaticProps = async ({ params }) => {
       notFound: true,
     };
   }
+
   try {
     const API_POST = `${process.env.NEXT_PUBLIC_API_BACKEND}/posts/${slug}`;
     const responsePost = await axios(API_POST);
 
-    console.log('Post', responsePost.data);
+    const API_SETTINGS = `${process.env.NEXT_PUBLIC_API_BACKEND}/settings`;
+    const responseSettings = await axios(API_SETTINGS);
 
     return {
       props: {
         post: responsePost.data,
+        settings: responseSettings.data,
       },
     };
   } catch (error) {

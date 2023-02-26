@@ -1,16 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaBars } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
-const Nav = () => {
+const Nav = ({ logo }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const btnMenuRef = useRef();
   const router = useRouter();
 
   useEffect(() => {
     const closeMenu = (e) => {
-      if (!btnMenuRef.current.contains(e.target)) setIsOpenMenu(false);
+      if (!btnMenuRef.current?.contains(e.target)) setIsOpenMenu(false);
     };
 
     document.body.addEventListener('click', closeMenu);
@@ -25,22 +26,21 @@ const Nav = () => {
         <span className="text-sm mr-4">laura@gmail.com</span>
       </div>
       <nav className="menu">
+        <div ref={btnMenuRef}>
+          <FaBars
+            onClick={() => setIsOpenMenu((prev) => !prev)}
+            className="text-blue-500 text-2xl menu__icon"
+          />
+        </div>
         <Image
-          ref={btnMenuRef}
-          onClick={() => setIsOpenMenu((prev) => !prev)}
-          width={25}
-          height={25}
-          src="/icons/icon_menu.svg"
-          alt="Menu Icon"
-          className="menu__icon"
+          className="hidden sm:block"
+          width={300}
+          height={40}
+          // src="/images/logo_desktop.png"
+          src={logo.value}
+          alt="logo"
         />
         <div className="menu__desktop">
-          <Image
-            width={300}
-            height={40}
-            src="/images/logo_desktop.png"
-            alt="logo"
-          />
           <ul className="menu__ul">
             <li
               className={`menu__link ${
@@ -97,10 +97,12 @@ const Nav = () => {
               </Link>
             </li>
           </ul>
-          <button className="text-purple-500 rounded-md hover:text-purple-700 hover:bg-blue-100 p-2">
-            Solicitar consulta
-          </button>
         </div>
+
+        <button className="text-purple-500 rounded-md hover:text-purple-700 hover:bg-blue-100 p-2">
+          <p>Solicitar</p>
+          <p>consulta</p>
+        </button>
 
         <div className={`menu__mobile ${isOpenMenu ? 'block' : 'hidden'}`}>
           <ul className="menu__ul-mobile">

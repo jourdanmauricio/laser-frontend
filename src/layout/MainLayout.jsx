@@ -1,4 +1,3 @@
-import Hero from '@/components/Hero';
 import Nav from '@/common/Nav';
 import Head from 'next/head';
 
@@ -52,8 +51,8 @@ const MainLayout = ({ children }) => {
 
           <link rel="icon" type="image/png" href="/favicon.png"></link>
         </Head>
-        <Nav />
-        {/* <Hero /> */}
+        {/* <Nav /> */}
+
         <main>{children}</main>
       </div>
     </>

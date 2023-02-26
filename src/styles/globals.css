@@ -17,15 +17,10 @@ body {
   max-width: 1400px;
   margin: auto;
   scroll-behavior: smooth;
-  font-family: var(--raleway-font);
+  /* font-family: var(--raleway-font); */
+  font-family: var(--quicksand-font);
   background-color: var(--background-color);
 }
-
-/* h1,
-h2,
-h3 {
-  font-family: var(--quicksand-font);
-} */
 
 a {
   color: inherit;
@@ -34,17 +29,22 @@ a {
 
 @layer base {
   h1 {
-    @apply text-3xl;
+    @apply mx-0 my-[0.67em] block text-[3em];
   }
   h2 {
-    @apply text-xl;
+    @apply mx-0 my-[0.83em] block text-[2em];
   }
   h3 {
-    @apply text-lg;
+    @apply mx-0 my-[1em] block text-[1.17em];
   }
-
   h4 {
-    @apply text-base;
+    @apply mx-0 my-[1.33em] block text-base;
+  }
+  h5 {
+    @apply mx-0 my-[1.67em] block text-[0.83em];
+  }
+  h6 {
+    @apply mx-0 my-[2.33em] block text-[0.67em];
   }
 }
 
@@ -57,17 +57,14 @@ a {
   transform-style: preserve-3d;
   position: relative;
 }
-
 .card:hover .front {
   transform: perspective(100px) rotateY(180deg);
   transition: all 1s;
 }
-
 .card:hover .back {
   transform: perspective(100px) rotateY(360deg);
   transition: all 1s;
 }
-
 .face {
   position: absolute;
   width: 100%;
@@ -81,18 +78,15 @@ a {
   border: 3px solid black;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
-
 .face.front {
   transform: perspective(100px) rotateY(0deg);
   padding: 1em;
   background-color: var(--gray-very-ligth);
 }
-
 .face__img {
   width: 100%;
   height: 100%;
 }
-
 .face.back {
   transform: perspective(100px) rotateY(180deg);
   font-weight: 600;
@@ -101,6 +95,10 @@ a {
   color: var(--effect-color);
   background-color: var(--gray-very-ligth);
 }
+
+/* .poshero {
+  top: var(--pos-hero); 
+} */
 
 @layer components {
   /*   DIVISOR   */
@@ -111,6 +109,11 @@ a {
     @apply bg-transparent px-0 py-4 rounded;
   } */
   /*   TITLE   */
+  /* .poshero {
+    @apply [color:posHero];
+  } */
+
+  /* var(--pos-hero); */
   .title {
     @apply text-center mt-6 font-semibold text-teal-600;
   }
@@ -142,22 +145,19 @@ a {
   }
 */
   .menu {
-    @apply flex justify-between sm:block sticky min-h-[50px] top-0 z-50 items-center bg-blue-50 shadow-[0_4px_9px_0px_rgba(41,41,41,0.25)] px-6 py-0;
+    @apply flex flex-row justify-between sticky min-h-[50px] top-0 z-50 items-center bg-blue-50 shadow-[0_4px_9px_0px_rgba(41,41,41,0.25)] px-6 py-0;
   }
-
   .menu__icon {
-    @apply sm:hidden hover:cursor-pointer;
+    @apply lg:hidden hover:cursor-pointer;
   }
-
   .menu__desktop {
-    @apply flex justify-between items-center;
+    @apply hidden lg:flex justify-between items-center;
   }
-
   .menu__ul {
-    @apply list-none p-0 m-0 hidden sm:flex items-center h-[50px] ml-3;
+    @apply list-none p-0 m-0 flex items-center h-[50px] ml-3;
   }
   .menu__link {
-    @apply ml-4 no-underline text-gray-900 border-b border-solid hover:text-gray-700;
+    @apply ml-4 no-underline text-gray-700 font-semibold border-b border-solid hover:text-gray-900;
   }
   .menu__item {
     @apply block px-2 py-1;

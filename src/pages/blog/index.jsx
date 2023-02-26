@@ -1,38 +1,75 @@
 import axios from 'axios';
 import Image from 'next/image';
-import { formatDateTable } from '../../helpers/functions';
 import Link from 'next/link';
+import Nav from '../../common/Nav';
 
-const Blog = ({ posts }) => {
+const Blog = ({ posts, settings }) => {
+  const logo = settings.find((setting) => setting.feature === 'logo');
   return (
-    <section>
+    <>
+      <Nav logo={logo} />
       <div className="bg-blue-100 h-40 flex flex-col justify-center items-center">
         <h1 className="text-slate-800">Blog, artículos y noticias</h1>
       </div>
-      <p className="text-slate-800 text-lg text-center pt-5 px-10 md:px-40">
-        En el blog encontrarás artículos sobre ginecología, sexología, y
-        tratamientos para mejorar la calidad de vida y conseguir un mayor nivel
-        de autoestima personal
-      </p>
-
-      <div className="flex flex-col gap-10 p-10">
-        {posts.map((post) => (
-          <article key={post.id} className="shadow-lg rounded-lg max-w-[400px]">
-            <div className="relative w-[300px] h-[300px]">
-              <Link href={`/blog/${post.slug}`}>
-                <Image
-                  width={300}
-                  height={300}
-                  className="rounded-tl-lg rounded-bl-lg"
-                  src={post.image}
-                  alt={post.alt_image}
-                />
-              </Link>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+      <section className="px-4 sm:px-10 text-center text-lg font-medium tracking-wide">
+        <h2 className="title my-6">¡Bienvenida a mi blog!</h2>
+        <p className="mt-4">
+          Aquí encontrarás una variedad de temas interesantes y útiles que te
+          ayudarán a mejorar tu vida y alcanzar tus objetivos. Desde consejos
+          sobre salud y bienestar, hasta artículos sobre tecnología y
+          entretenimiento, mi blog tiene algo para todos.
+        </p>
+        <p className="mt-4">
+          Mis publicaciones están escritas con el objetivo de informar, inspirar
+          y entretener. Me apasiona compartir información valiosa y útil que
+          pueda ayudarte a tomar decisiones informadas y a mejorar tu vida de
+          alguna manera.
+        </p>
+        <p className="mt-4">
+          Además, estoy siempre abierto a sugerencias y comentarios de mis
+          lectores. Si tienes alguna pregunta o tema que te gustaría que cubra
+          en mi blog, no dudes en contactarme.
+        </p>
+        <p className="mt-4">
+          ¡Gracias por visitar mi blog! Espero que disfrutes leyendo mis
+          publicaciones tanto como yo disfruto escribirlas.
+        </p>
+        <div className="flex flex-col gap-10 py-10 px-5 lg:px-40 w-full">
+          {posts.map((post) => (
+            <>
+              <article
+                key={post.id}
+                className="flex flex-col sm:flex-row sm:gap-5 shadow-lg rounded-lg min-w-[300px] bg-blue-50"
+              >
+                <div className="relative sm:min-w-[250px] min-h-[150px]">
+                  <Link href={`/blog/${post.slug}`}>
+                    <Image
+                      fill
+                      className="rounded-tl-lg rounded-bl-lg object-contain overflow-hidden aspect-square"
+                      src={post.image}
+                      alt={post.alt_image}
+                    />
+                  </Link>
+                </div>
+                <div className="w-full">
+                  <Link href={`/blog/${post.slug}`}>
+                    <h3 className="title">{post.title}</h3>
+                  </Link>
+                  <p className="text-left line-clamp-2 my-4">{post.resume}</p>
+                  <div className="text-center mb-2">
+                    <Link href={`/blog/${post.slug}`}>
+                      <strong className="hover:underline text-sm">
+                        Seguir leyendo...
+                      </strong>
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            </>
+          ))}
+        </div>
+      </section>
+    </>
   );
 };
 
@@ -45,11 +82,15 @@ export async function getStaticProps() {
 
     const posts = responsePosts.data.sort((a, b) => b.order - a.order);
 
-    console.log('POSTS BLOG getStaticProps', posts);
+    const API_SETTINGS = `${process.env.NEXT_PUBLIC_API_BACKEND}/settings`;
+    const responseSettings = await axios(API_SETTINGS);
+
+    // console.log('POSTS BLOG getStaticProps', posts);
 
     return {
       props: {
         posts: posts,
+        settings: responseSettings.data,
       },
     };
   } catch (error) {
