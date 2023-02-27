@@ -13,6 +13,8 @@ const Hero = ({ heroImage, heroText, heroPos, heroOpacity }) => {
             className="inline-block bg-cover bg-center shadow-[0_0_10px_rgba(0,0,0,0.1)] w-full h-auto"
             src={heroImage.value}
             alt={heroImage.feature}
+            width={1400}
+            height={860}
           />
 
           <div
