@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const Hero = ({ heroImage, heroText, heroPos, heroOpacity }) => {
   return (
     // <section
@@ -9,7 +11,7 @@ const Hero = ({ heroImage, heroText, heroPos, heroOpacity }) => {
       <section>
         <div className="relative tex-center inline-block max-w-[1400px] w-full h-auto">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             className="inline-block bg-cover bg-center shadow-[0_0_10px_rgba(0,0,0,0.1)] w-full h-auto"
             src={heroImage.value}
             alt={heroImage.feature}
