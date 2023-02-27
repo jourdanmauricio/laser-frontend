@@ -4,10 +4,31 @@ import Link from 'next/link';
 import Nav from '../../common/Nav';
 
 const Blog = ({ posts, settings }) => {
-  const logo = settings.find((setting) => setting.feature === 'logo');
+  const logoImage = settings.find((setting) => setting.feature === 'logoImage');
+  const navBgColor = settings.find(
+    (setting) => setting.feature === 'navBgColor'
+  );
+  const navTextColor = settings.find(
+    (setting) => setting.feature === 'navTextColor'
+  );
+  const navHoverColor = settings.find(
+    (setting) => setting.feature === 'navHoverColor'
+  );
+  const navCurrentPageColor = settings.find(
+    (setting) => setting.feature === 'navCurrentPageColor'
+  );
+
   return (
     <>
-      <Nav logo={logo} />
+      <style jsx global>{`
+        :root {
+          --navBgColor: ${navBgColor.value};
+          --navTextColor: ${navTextColor.value};
+          --navHoverColor: ${navHoverColor.value};
+          --navCurrentPageColor: ${navCurrentPageColor.value};
+        }
+      `}</style>
+      <Nav logoImage={logoImage} />
       <div className="bg-blue-100 h-40 flex flex-col justify-center items-center">
         <h1 className="text-slate-800">Blog, artículos y noticias</h1>
       </div>
@@ -36,36 +57,34 @@ const Blog = ({ posts, settings }) => {
         </p>
         <div className="flex flex-col gap-10 py-10 px-5 lg:px-40 w-full">
           {posts.map((post) => (
-            <>
-              <article
-                key={post.id}
-                className="flex flex-col sm:flex-row sm:gap-5 shadow-lg rounded-lg min-w-[300px] bg-blue-50"
-              >
-                <div className="relative sm:min-w-[250px] min-h-[150px]">
+            <article
+              key={post.id}
+              className="flex flex-col sm:flex-row sm:gap-5 shadow-lg rounded-lg min-w-[300px] bg-blue-50"
+            >
+              <div className="relative sm:min-w-[250px] min-h-[150px]">
+                <Link href={`/blog/${post.slug}`}>
+                  <Image
+                    fill
+                    className="rounded-tl-lg rounded-bl-lg object-contain overflow-hidden aspect-square"
+                    src={post.image}
+                    alt={post.alt_image}
+                  />
+                </Link>
+              </div>
+              <div className="w-full">
+                <Link href={`/blog/${post.slug}`}>
+                  <h3 className="title">{post.title}</h3>
+                </Link>
+                <p className="text-left line-clamp-2 my-4">{post.resume}</p>
+                <div className="text-center mb-2">
                   <Link href={`/blog/${post.slug}`}>
-                    <Image
-                      fill
-                      className="rounded-tl-lg rounded-bl-lg object-contain overflow-hidden aspect-square"
-                      src={post.image}
-                      alt={post.alt_image}
-                    />
+                    <strong className="hover:underline text-sm">
+                      Seguir leyendo...
+                    </strong>
                   </Link>
                 </div>
-                <div className="w-full">
-                  <Link href={`/blog/${post.slug}`}>
-                    <h3 className="title">{post.title}</h3>
-                  </Link>
-                  <p className="text-left line-clamp-2 my-4">{post.resume}</p>
-                  <div className="text-center mb-2">
-                    <Link href={`/blog/${post.slug}`}>
-                      <strong className="hover:underline text-sm">
-                        Seguir leyendo...
-                      </strong>
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            </>
+              </div>
+            </article>
           ))}
         </div>
       </section>

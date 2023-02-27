@@ -6,20 +6,43 @@ import Clinics from '../components/Clinics/Clinics';
 import Nav from '../common/Nav';
 
 export default function Home({ posts, clinics, settings }) {
-  const logo = settings.find((setting) => setting.feature === 'logo');
-  const hero = settings.find((setting) => setting.feature === 'hero');
-  const textHero = settings.find((setting) => setting.feature === 'textHero');
-  const posHero = settings.find((setting) => setting.feature === 'posHero');
+  const logoImage = settings.find((setting) => setting.feature === 'logoImage');
+  const heroImage = settings.find((setting) => setting.feature === 'heroImage');
+  const heroText = settings.find((setting) => setting.feature === 'heroText');
+  const heroPos = settings.find((setting) => setting.feature === 'heroPos');
+  const heroOpacity = settings.find(
+    (setting) => setting.feature === 'heroOpacity'
+  );
+  const navBgColor = settings.find(
+    (setting) => setting.feature === 'navBgColor'
+  );
+  const navTextColor = settings.find(
+    (setting) => setting.feature === 'navTextColor'
+  );
+  const navHoverColor = settings.find(
+    (setting) => setting.feature === 'navHoverColor'
+  );
+  const navCurrentPageColor = settings.find(
+    (setting) => setting.feature === 'navCurrentPageColor'
+  );
 
   return (
     <>
       <style jsx global>{`
         :root {
-          // --pos-hero: ${posHero.value};
+          --navBgColor: ${navBgColor.value};
+          --navTextColor: ${navTextColor.value};
+          --navHoverColor: ${navHoverColor.value};
+          --navCurrentPageColor: ${navCurrentPageColor.value};
         }
       `}</style>
-      <Nav logo={logo} />
-      <Hero hero={hero} textHero={textHero} posHero={posHero} />
+      <Nav logoImage={logoImage} />
+      <Hero
+        heroImage={heroImage}
+        heroText={heroText}
+        heroPos={heroPos}
+        heroOpacity={heroOpacity}
+      />
       <Blog posts={posts} />
       <Clinics clinics={clinics} />
     </>

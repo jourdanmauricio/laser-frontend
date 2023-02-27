@@ -96,10 +96,6 @@ a {
   background-color: var(--gray-very-ligth);
 }
 
-/* .poshero {
-  top: var(--pos-hero); 
-} */
-
 @layer components {
   /*   DIVISOR   */
   /* .divider__content {
@@ -109,11 +105,6 @@ a {
     @apply bg-transparent px-0 py-4 rounded;
   } */
   /*   TITLE   */
-  /* .poshero {
-    @apply [color:posHero];
-  } */
-
-  /* var(--pos-hero); */
   .title {
     @apply text-center mt-6 font-semibold text-teal-600;
   }
@@ -145,7 +136,7 @@ a {
   }
 */
   .menu {
-    @apply flex flex-row justify-between sticky min-h-[50px] top-0 z-50 items-center bg-blue-50 shadow-[0_4px_9px_0px_rgba(41,41,41,0.25)] px-6 py-0;
+    @apply flex flex-row justify-between sticky min-h-[50px] top-0 z-50 items-center bg-navBgColor shadow-[0_4px_9px_0px_rgba(0,0,0,0.5)] px-6 py-0;
   }
   .menu__icon {
     @apply lg:hidden hover:cursor-pointer;
@@ -157,10 +148,10 @@ a {
     @apply list-none p-0 m-0 flex items-center h-[50px] ml-3;
   }
   .menu__link {
-    @apply ml-4 no-underline text-gray-700 font-semibold border-b border-solid hover:text-gray-900;
+    @apply ml-4 no-underline text-gray-700 font-semibold hover:border-b hover:border-solid hover:border-b-navHoverColor;
   }
   .menu__item {
-    @apply block px-2 py-1;
+    @apply block px-2 py-1 text-navTextColor hover:text-navHoverColor;
   }
   .menu__mobile {
     @apply absolute top-[45px] left-0 w-[50%] bg-slate-200 -z-10;

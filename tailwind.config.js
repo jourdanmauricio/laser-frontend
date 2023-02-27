@@ -16,7 +16,10 @@ module.exports = {
         quicksand: ['var(--quicksand-font)', ...fontFamily.sans],
       },
       colors: {
-        posHero: 'var(--pos-hero)',
+        navBgColor: 'var(--navBgColor)',
+        navTextColor: 'var(--navTextColor)',
+        navHoverColor: 'var(--navHoverColor)',
+        navCurrentPageColor: 'var(--navCurrentPageColor)',
       },
     },
   },

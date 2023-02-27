@@ -1,5 +1,4 @@
-const Hero = ({ hero, textHero, posHero }) => {
-  console.log('posHero', posHero);
+const Hero = ({ heroImage, heroText, heroPos, heroOpacity }) => {
   return (
     // <section
     //   style={{ backgroundImage: `url('${image.value}')` }}
@@ -8,26 +7,52 @@ const Hero = ({ hero, textHero, posHero }) => {
     // >
     <>
       <section>
-        <div className="relative tex-center inline-block max-w-[1400px] w-full max-h-screen">
+        <div className="relative tex-center inline-block max-w-[1400px] w-full h-auto">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            className="inline-block bg-cover bg-center border border-solid border-gray-300 shadow-[0_0_10px_rgba(0,0,0,0.1)] w-full max-h-screen"
-            src={hero.value}
-            alt={hero.feature}
+            className="inline-block bg-cover bg-center shadow-[0_0_10px_rgba(0,0,0,0.1)] w-full h-auto"
+            src={heroImage.value}
+            alt={heroImage.feature}
           />
 
           <div
-            className={`absolute text-center ${
-              posHero.value === 'top-1/4'
+            className={`absolute h-full w-full top-0 bg-black ${
+              heroOpacity.value === '10'
+                ? 'opacity-10'
+                : heroOpacity.value === '20'
+                ? 'opacity-20'
+                : heroOpacity.value === '30'
+                ? 'opacity-30'
+                : heroOpacity.value === '40'
+                ? 'opacity-40'
+                : heroOpacity.value === '50'
+                ? 'opacity-50'
+                : heroOpacity.value === '60'
+                ? 'opacity-60'
+                : heroOpacity.value === '70'
+                ? 'opacity-70'
+                : heroOpacity.value === '80'
+                ? 'opacity-80'
+                : heroOpacity.value === '90'
+                ? 'opacity-90'
+                : heroOpacity.value === '100'
+                ? 'opacity-100'
+                : 'opacity-0'
+            }`}
+          ></div>
+
+          <div
+            className={`absolute text-center  ${
+              heroPos.value === 'top-1/4'
                 ? 'top-1/4'
-                : posHero.value === 'top-3/4'
+                : heroPos.value === 'top-3/4'
                 ? 'top-3/4'
                 : 'top-1/2'
             } left-1/2 -translate-x-2/4 -translate-y-2/4 w-full p-10`}
           >
             <div
               className="relative ql-editor"
-              dangerouslySetInnerHTML={{ __html: textHero.value }}
+              dangerouslySetInnerHTML={{ __html: heroText.value }}
             />
           </div>
         </div>

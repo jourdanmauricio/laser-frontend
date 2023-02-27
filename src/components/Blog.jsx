@@ -18,6 +18,7 @@ const Blog = ({ posts }) => {
               alt={post.alt_image}
             />
           </div>
+
           <div className="flex flex-col justify-between w-full">
             <h2 className="text-center text-2xl font-medium">{post.title}</h2>
             <p className="text-left line-clamp-2 my-4">{post.resume}</p>

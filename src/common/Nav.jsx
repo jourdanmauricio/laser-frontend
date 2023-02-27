@@ -4,7 +4,7 @@ import { FaBars } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
-const Nav = ({ logo }) => {
+const Nav = ({ logoImage }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const btnMenuRef = useRef();
   const router = useRouter();
@@ -21,7 +21,7 @@ const Nav = ({ logo }) => {
 
   return (
     <>
-      <div className="h-10 bg-blue-50 flex items-center justify-end gap-4">
+      <div className="h-10 bg-navBgColor text-navTextColor flex items-center justify-end gap-4">
         <span className="text-sm">02262-45-4545</span>
         <span className="text-sm mr-4">laura@gmail.com</span>
       </div>
@@ -29,22 +29,23 @@ const Nav = ({ logo }) => {
         <div ref={btnMenuRef}>
           <FaBars
             onClick={() => setIsOpenMenu((prev) => !prev)}
-            className="text-blue-500 text-2xl menu__icon"
+            className="text-navTextColor text-2xl menu__icon"
           />
         </div>
         <Image
           className="hidden sm:block"
           width={300}
           height={40}
-          // src="/images/logo_desktop.png"
-          src={logo.value}
+          src={logoImage.value}
           alt="logo"
         />
         <div className="menu__desktop">
           <ul className="menu__ul">
             <li
               className={`menu__link ${
-                router.asPath == '/' ? 'border-teal-500' : 'border-slate-200'
+                router.asPath == '/'
+                  ? 'border-b border-solid border-navCurrentPageColor'
+                  : ''
               }`}
             >
               <Link className="menu__item" href="/" scroll={false}>
@@ -54,8 +55,8 @@ const Nav = ({ logo }) => {
             <li
               className={`menu__link ${
                 router.asPath == '/#servicios'
-                  ? 'border-buttonColor'
-                  : 'border-slate-200'
+                  ? 'border-b border-solid border-navCurrentPageColor'
+                  : ''
               }`}
             >
               <Link className="menu__item" href="#servicios" scroll={false}>
@@ -66,8 +67,8 @@ const Nav = ({ logo }) => {
             <li
               className={`menu__link ${
                 router.asPath == '/#servicios'
-                  ? 'border-buttonColor'
-                  : 'border-slate-200'
+                  ? 'border-b border-solid border-navCurrentPageColor'
+                  : ''
               }`}
             >
               <Link className="menu__item" href="#servicios" scroll={false}>
@@ -76,9 +77,9 @@ const Nav = ({ logo }) => {
             </li>
             <li
               className={`menu__link ${
-                router.asPath == '/blog'
-                  ? 'border-teal-500'
-                  : 'border-slate-200'
+                router.asPath === '/blog'
+                  ? 'border-b border-solid border-navCurrentPageColor'
+                  : ''
               }`}
             >
               <Link className="menu__item" href="/blog" scroll={false}>
@@ -88,8 +89,8 @@ const Nav = ({ logo }) => {
             <li
               className={`menu__link ${
                 router.asPath == '/#contact'
-                  ? 'border-buttonColor'
-                  : 'border-slate-200'
+                  ? 'border-b border-solid border-navCurrentPageColor'
+                  : ''
               }`}
             >
               <Link className="menu__item" href="#contact" scroll={false}>
@@ -99,7 +100,7 @@ const Nav = ({ logo }) => {
           </ul>
         </div>
 
-        <button className="text-purple-500 rounded-md hover:text-purple-700 hover:bg-blue-100 p-2">
+        <button className="text-navTextColor p-2 hover:text-navHoverColor">
           <p>Solicitar</p>
           <p>consulta</p>
         </button>

@@ -4,10 +4,10 @@ import Author from '../../components/Author';
 import Nav from '../../common/Nav';
 
 const Slug = ({ post, settings }) => {
-  const logo = settings.find((setting) => setting.feature === 'logo');
+  const logoImage = settings.find((setting) => setting.feature === 'logoImage');
   return (
     <>
-      <Nav logo={logo} />
+      <Nav logoImage={logoImage} />
       <div className="p-10">
         <h1 className="title">{post.title} </h1>
 
