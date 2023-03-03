@@ -9,6 +9,8 @@ const Nav = ({ logoImage }) => {
   const btnMenuRef = useRef();
   const router = useRouter();
 
+  console.log('router.asPath', router.asPath);
+
   useEffect(() => {
     const closeMenu = (e) => {
       if (!btnMenuRef.current?.contains(e.target)) setIsOpenMenu(false);
@@ -21,7 +23,10 @@ const Nav = ({ logoImage }) => {
 
   return (
     <>
-      <div className="h-10 bg-navBgColor text-navTextColor flex items-center justify-end gap-4">
+      <div
+        id="inicio"
+        className="h-10 bg-navBgColor text-navTextColor flex items-center justify-end gap-4"
+      >
         <span className="text-sm">02262-45-4545</span>
         <span className="text-sm mr-4">laura@gmail.com</span>
       </div>
@@ -43,23 +48,23 @@ const Nav = ({ logoImage }) => {
           <ul className="menu__ul">
             <li
               className={`menu__link ${
-                router.asPath == '/'
+                router.asPath === '/' || router.asPath === '/#inicio'
                   ? 'border-b border-solid border-navCurrentPageColor'
-                  : ''
+                  : 'border-none'
               }`}
             >
-              <Link className="menu__item" href="/" scroll={false}>
+              <Link className="menu__item" href="/#inicio" scroll={false}>
                 Inicio
               </Link>
             </li>
             <li
               className={`menu__link ${
-                router.asPath == '/#servicios'
+                router.asPath == '/#nosotros'
                   ? 'border-b border-solid border-navCurrentPageColor'
                   : ''
               }`}
             >
-              <Link className="menu__item" href="#servicios" scroll={false}>
+              <Link className="menu__item" href="/#nosotros" scroll={false}>
                 Sobre mi
               </Link>
             </li>
@@ -71,7 +76,7 @@ const Nav = ({ logoImage }) => {
                   : ''
               }`}
             >
-              <Link className="menu__item" href="#servicios" scroll={false}>
+              <Link className="menu__item" href="/#servicios" scroll={false}>
                 Servicios
               </Link>
             </li>
@@ -88,12 +93,12 @@ const Nav = ({ logoImage }) => {
             </li>
             <li
               className={`menu__link ${
-                router.asPath == '/#contact'
+                router.asPath == '/contact'
                   ? 'border-b border-solid border-navCurrentPageColor'
                   : ''
               }`}
             >
-              <Link className="menu__item" href="#contact" scroll={false}>
+              <Link className="menu__item" href="/contact" scroll={false}>
                 Contacto
               </Link>
             </li>

@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
           --raleway-font: ${raleway.style.fontFamily};
         }
       `}</style>
-      <MainLayout className={raleway.className}>
+      <MainLayout>
         <Component {...pageProps} />
       </MainLayout>
     </>

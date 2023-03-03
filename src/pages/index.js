@@ -4,15 +4,17 @@ import Hero from '../components/Hero';
 import Blog from '../components/Blog';
 import Clinics from '../components/Clinics/Clinics';
 import Nav from '../common/Nav';
+import About from '../components/About';
 
 export default function Home({ posts, clinics, settings }) {
   const logoImage = settings.find((setting) => setting.feature === 'logoImage');
   const heroImage = settings.find((setting) => setting.feature === 'heroImage');
   const heroText = settings.find((setting) => setting.feature === 'heroText');
-  const heroPos = settings.find((setting) => setting.feature === 'heroPos');
   const heroOpacity = settings.find(
     (setting) => setting.feature === 'heroOpacity'
   );
+  const heroTop = settings.find((setting) => setting.feature === 'heroTop');
+
   const navBgColor = settings.find(
     (setting) => setting.feature === 'navBgColor'
   );
@@ -25,24 +27,33 @@ export default function Home({ posts, clinics, settings }) {
   const navCurrentPageColor = settings.find(
     (setting) => setting.feature === 'navCurrentPageColor'
   );
+  const bodyBgColor = settings.find(
+    (setting) => setting.feature === 'bodyBgColor'
+  );
+  const h1Color = settings.find((setting) => setting.feature === 'h1Color');
+  const h1Pos = settings.find((setting) => setting.feature === 'h1Pos');
+  const h2Pos = settings.find((setting) => setting.feature === 'h2Pos');
+
+  console.log('navCurrentPageColor', navCurrentPageColor.value);
 
   return (
     <>
       <style jsx global>{`
         :root {
+          --heroTop: ${heroTop.value};
+          --heroOpacity: ${heroOpacity.value};
           --navBgColor: ${navBgColor.value};
           --navTextColor: ${navTextColor.value};
           --navHoverColor: ${navHoverColor.value};
           --navCurrentPageColor: ${navCurrentPageColor.value};
+          --h1Color: ${h1Color.value};
+          --bodyBgColor: ${bodyBgColor.value};
+          --h2Pos: ${h2Pos.value};
         }
       `}</style>
       <Nav logoImage={logoImage} />
-      <Hero
-        heroImage={heroImage}
-        heroText={heroText}
-        heroPos={heroPos}
-        heroOpacity={heroOpacity}
-      />
+      <Hero heroImage={heroImage} heroText={heroText} />
+      <About h1Pos={h1Pos} />
       <Blog posts={posts} />
       <Clinics clinics={clinics} />
     </>

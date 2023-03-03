@@ -1,12 +1,34 @@
 import axios from 'axios';
 import Image from 'next/image';
-import Author from '../../components/Author';
-import Nav from '../../common/Nav';
+import Author from '@/components/Author';
+import Nav from '@/common/Nav';
 
 const Slug = ({ post, settings }) => {
   const logoImage = settings.find((setting) => setting.feature === 'logoImage');
+  const navBgColor = settings.find(
+    (setting) => setting.feature === 'navBgColor'
+  );
+  const navTextColor = settings.find(
+    (setting) => setting.feature === 'navTextColor'
+  );
+  const navHoverColor = settings.find(
+    (setting) => setting.feature === 'navHoverColor'
+  );
+  const navCurrentPageColor = settings.find(
+    (setting) => setting.feature === 'navCurrentPageColor'
+  );
+
   return (
     <>
+      <style jsx global>{`
+        :root {
+          --navBgColor: ${navBgColor.value};
+          --navTextColor: ${navTextColor.value};
+          --navHoverColor: ${navHoverColor.value};
+          --navCurrentPageColor: ${navCurrentPageColor.value};
+        }
+      `}</style>
+
       <Nav logoImage={logoImage} />
       <div className="p-10">
         <h1 className="title">{post.title} </h1>

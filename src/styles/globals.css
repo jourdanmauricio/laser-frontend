@@ -19,7 +19,7 @@ body {
   scroll-behavior: smooth;
   /* font-family: var(--raleway-font); */
   font-family: var(--quicksand-font);
-  background-color: var(--background-color);
+  background-color: var(--bodyBgColor);
 }
 
 a {
@@ -27,11 +27,20 @@ a {
   text-decoration: none;
 }
 
+.hero__top {
+  top: var(--heroTop);
+}
+
+.hero__opacity {
+  opacity: var(--heroOpacity);
+}
 @layer base {
   h1 {
+    text-align: var(--h1Pos);
     @apply mx-0 my-[0.67em] block text-[3em];
   }
   h2 {
+    text-align: var(--h2Pos);
     @apply mx-0 my-[0.83em] block text-[2em];
   }
   h3 {
@@ -106,7 +115,7 @@ a {
   } */
   /*   TITLE   */
   .title {
-    @apply text-center mt-6 font-semibold text-teal-600;
+    @apply mt-6 font-semibold text-teal-600;
   }
 
   /*   PARAGRAPH   */
