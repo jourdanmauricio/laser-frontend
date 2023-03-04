@@ -5,8 +5,9 @@ import Blog from '../components/Blog';
 import Clinics from '../components/Clinics/Clinics';
 import Nav from '../common/Nav';
 import About from '../components/About';
+import { NextSeo } from 'next-seo';
 
-export default function Home({ posts, clinics, settings }) {
+export default function Home({ posts, clinics, settings, sections }) {
   const logoImage = settings.find((setting) => setting.feature === 'logoImage');
   const heroImage = settings.find((setting) => setting.feature === 'heroImage');
   const heroText = settings.find((setting) => setting.feature === 'heroText');
@@ -34,7 +35,9 @@ export default function Home({ posts, clinics, settings }) {
   const h1Pos = settings.find((setting) => setting.feature === 'h1Pos');
   const h2Pos = settings.find((setting) => setting.feature === 'h2Pos');
 
-  console.log('navCurrentPageColor', navCurrentPageColor.value);
+  const aboutContent = sections.find((section) => section.name === 'about');
+
+  console.log('aboutContent', aboutContent);
 
   return (
     <>
@@ -51,9 +54,28 @@ export default function Home({ posts, clinics, settings }) {
           --h2Pos: ${h2Pos.value};
         }
       `}</style>
+      <NextSeo
+        title="Doctora Laura Rodriguez"
+        description="Información relacionada mujeres a tener una vida sexual y reproductiva saludable y satisfactoria"
+        canonical="https://hathayogaloberia.ga"
+        openGraph={{
+          type: 'website',
+          url: 'https://hathayogaloberia.ga',
+          // title: 'Open Graph Title',
+          // description: 'Open Graph Description',
+          images: [
+            {
+              url: `${heroImage.value}`,
+              width: 800,
+              height: 600,
+              alt: 'Doctora Laura Rodriguez',
+            },
+          ],
+        }}
+      />
       <Nav logoImage={logoImage} />
       <Hero heroImage={heroImage} heroText={heroText} />
-      <About h1Pos={h1Pos} />
+      <About aboutContent={aboutContent} />
       <Blog posts={posts} />
       <Clinics clinics={clinics} />
     </>
@@ -71,6 +93,9 @@ export async function getStaticProps() {
     const API_SETTINGS = `${process.env.NEXT_PUBLIC_API_BACKEND}/settings`;
     const responseSettings = await axios(API_SETTINGS);
 
+    const API_SECTIONS = `${process.env.NEXT_PUBLIC_API_BACKEND}/sections`;
+    const responseSections = await axios(API_SECTIONS);
+
     const posts = responsePosts.data
       .sort((a, b) => b.order - a.order)
       .filter((post) => post.main === true);
@@ -84,6 +109,7 @@ export async function getStaticProps() {
         posts: posts,
         clinics,
         settings: responseSettings.data,
+        sections: responseSections.data,
       },
     };
   } catch (error) {

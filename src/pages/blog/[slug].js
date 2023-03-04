@@ -2,6 +2,22 @@ import axios from 'axios';
 import Image from 'next/image';
 import Author from '@/components/Author';
 import Nav from '@/common/Nav';
+import { NextSeo } from 'next-seo';
+
+import {
+  TwitterShareButton,
+  FacebookShareButton,
+  EmailShareButton,
+  PinterestShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+  EmailIcon,
+  FacebookIcon,
+  PinterestIcon,
+  TelegramIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from 'react-share';
 
 const Slug = ({ post, settings }) => {
   const logoImage = settings.find((setting) => setting.feature === 'logoImage');
@@ -29,10 +45,29 @@ const Slug = ({ post, settings }) => {
         }
       `}</style>
 
+      <NextSeo
+        title={post.title}
+        description={post.resume}
+        canonical={`https://hathayogaloberia.ga/blog/${post.slug}`}
+        openGraph={{
+          type: 'website',
+          url: `https://hathayogaloberia.ga/blog/${post.slug}`,
+          // title: 'Open Graph Title',
+          // description: 'Open Graph Description',
+          images: [
+            {
+              url: `${post.image}`,
+              width: 800,
+              height: 600,
+              alt: `${post.alt_image}`,
+            },
+          ],
+        }}
+      />
+
       <Nav logoImage={logoImage} />
       <div className="p-10">
         <h1 className="title">{post.title} </h1>
-
         <div className="mt-10 min-h-[50vh] font-normal text-base border-gray-500 w-full">
           <div className="float-none md:float-left md:pr-10 md:pb-10">
             <Image
@@ -48,6 +83,55 @@ const Slug = ({ post, settings }) => {
             className="relative ql-editor"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
+        </div>
+        <div className="flex gap-4 items-center">
+          <FacebookShareButton
+            // url={`https://hathayogaloberia.com.ar/blog/${post.slug}`}
+            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+            quote={'Dummy text!'}
+            hashtag="#muo"
+          >
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>
+
+          <TwitterShareButton
+            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+            quote={'Dummy text!'}
+            hashtag="#muo"
+          >
+              
+            <TwitterIcon className="-top-10" size={32} round />
+          </TwitterShareButton>
+
+          <EmailShareButton
+            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+            quote={'Dummy text!'}
+            hashtag="#muo"
+          >
+            <EmailIcon size={32} round />
+          </EmailShareButton>
+          <PinterestShareButton
+            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+            quote={'Dummy text!'}
+            hashtag="#muo"
+          >
+            <PinterestIcon size={32} round />
+          </PinterestShareButton>
+
+          <TelegramShareButton
+            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+            quote={'Dummy text!'}
+            hashtag="#muo"
+          >
+            <TelegramIcon size={32} round />
+          </TelegramShareButton>
+          <WhatsappShareButton
+            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+            quote={'Dummy text!'}
+            hashtag="#muo"
+          >
+            <WhatsappIcon size={32} round />
+          </WhatsappShareButton>
         </div>
         <Author post={post} />
       </div>

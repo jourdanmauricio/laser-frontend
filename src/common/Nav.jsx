@@ -59,9 +59,9 @@ const Nav = ({ logoImage }) => {
             </li>
             <li
               className={`menu__link ${
-                router.asPath == '/#nosotros'
+                router.asPath === '/#nosotros'
                   ? 'border-b border-solid border-navCurrentPageColor'
-                  : ''
+                  : 'border-none'
               }`}
             >
               <Link className="menu__item" href="/#nosotros" scroll={false}>
