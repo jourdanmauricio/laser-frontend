@@ -48,10 +48,10 @@ const Slug = ({ post, settings }) => {
       <NextSeo
         title={post.title}
         description={post.resume}
-        canonical={`https://hathayogaloberia.ga/blog/${post.slug}`}
+        canonical={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
         openGraph={{
           type: 'website',
-          url: `https://hathayogaloberia.ga/blog/${post.slug}`,
+          url: `${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`,
           // title: 'Open Graph Title',
           // description: 'Open Graph Description',
           images: [
@@ -99,7 +99,6 @@ const Slug = ({ post, settings }) => {
             quote={'Dummy text!'}
             hashtag="#muo"
           >
-              
             <TwitterIcon className="-top-10" size={32} round />
           </TwitterShareButton>
 
