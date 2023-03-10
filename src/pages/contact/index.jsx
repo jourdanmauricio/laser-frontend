@@ -50,7 +50,6 @@ const Contact = ({ settings }) => {
           --navTextColor: ${navTextColor.value};
           --navHoverColor: ${navHoverColor.value};
           --navCurrentPageColor: ${navCurrentPageColor.value};
-          --blogBgColor: ${blogBgColor.value};
           // Footer
           --footerBgColor: ${footerBgColor.value};
           --footerTextColor: ${footerTextColor.value};
