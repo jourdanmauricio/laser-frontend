@@ -1,5 +1,6 @@
 import axios from 'axios';
-import Nav from '../../common/Nav';
+import Nav from '@/common/Nav';
+import Footer from '@/common/Footer/Footer';
 
 const Contact = ({ settings }) => {
   const logoImage = settings.find((setting) => setting.feature === 'logoImage');
@@ -15,6 +16,31 @@ const Contact = ({ settings }) => {
   const navCurrentPageColor = settings.find(
     (setting) => setting.feature === 'navCurrentPageColor'
   );
+  // FOOTER
+  const footerBgColor = settings.find(
+    (setting) => setting.feature === 'footerBgColor'
+  );
+  const footerTextColor = settings.find(
+    (setting) => setting.feature === 'footerTextColor'
+  );
+  const footerButtonsColor = settings.find(
+    (setting) => setting.feature === 'footerButtonsColor'
+  );
+  const footerButtonsHoverColor = settings.find(
+    (setting) => setting.feature === 'footerButtonsHoverColor'
+  );
+  const footerLinksColor = settings.find(
+    (setting) => setting.feature === 'footerLinksColor'
+  );
+  const footerLinksHoverColor = settings.find(
+    (setting) => setting.feature === 'footerLinksHoverColor'
+  );
+  const footer2BgColor = settings.find(
+    (setting) => setting.feature === 'footer2BgColor'
+  );
+  const footer2TextColor = settings.find(
+    (setting) => setting.feature === 'footer2TextColor'
+  );
 
   return (
     <>
@@ -24,12 +50,23 @@ const Contact = ({ settings }) => {
           --navTextColor: ${navTextColor.value};
           --navHoverColor: ${navHoverColor.value};
           --navCurrentPageColor: ${navCurrentPageColor.value};
+          --blogBgColor: ${blogBgColor.value};
+          // Footer
+          --footerBgColor: ${footerBgColor.value};
+          --footerTextColor: ${footerTextColor.value};
+          --footerButtonsColor: ${footerButtonsColor.value};
+          --footerButtonsHoverColor: ${footerButtonsHoverColor.value};
+          --footerLinksColor: ${footerLinksColor.value};
+          --footerLinksHoverColor: ${footerLinksHoverColor.value};
+          --footer2BgColor: ${footer2BgColor.value};
+          --footer2TextColor: ${footer2TextColor.value};
         }
       `}</style>
-      <Nav logoImage={logoImage} />
+      <Nav settings={settings} />
       <div className="bg-blue-100 h-40 flex flex-col justify-center items-center">
         <h1 className="text-slate-800">Contacto</h1>
       </div>
+      <Footer settings={settings} />
     </>
   );
 };
