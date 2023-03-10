@@ -72,6 +72,8 @@ export default function Home({ posts, clinics, settings, sections }) {
     (setting) => setting.feature === 'footer2TextColor'
   );
 
+  console.log('footerLinksColor', footerLinksColor);
+
   return (
     <>
       <style jsx global>{`

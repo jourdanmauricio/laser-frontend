@@ -134,7 +134,7 @@ a {
   }
 
   /*   FORM   */
-  /* .form__group {
+  .form__group {
     @apply relative w-11/12 mb-8;
   }
 
@@ -142,13 +142,14 @@ a {
     @apply absolute left-[5px] text-red-700;
   }
   .form__error {
-    @apply absolute text-left w-11/12 rounded text-sm text-errorColor block transition-opacity duration-1000 ease-in-out;
+    @apply absolute text-left w-11/12 rounded text-sm text-red-500 block transition-opacity duration-1000 ease-in-out;
   }
 
   .form__input {
     @apply w-full py-1 px-4 font-normal border border-solid border-gray-800 rounded bg-transparent  text-black focus:outline-none;
   }
-*/
+
+  /* MENU */
   .menu {
     @apply flex flex-row justify-between sticky min-h-[50px] top-0 z-50 items-center bg-navBgColor shadow-[0_4px_9px_0px_rgba(0,0,0,0.5)] px-6 py-0;
   }
