@@ -18,6 +18,7 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from 'react-share';
+import Footer from '../../common/Footer/Footer';
 
 const Slug = ({ post, settings }) => {
   const logoImage = settings.find((setting) => setting.feature === 'logoImage');
@@ -34,6 +35,32 @@ const Slug = ({ post, settings }) => {
     (setting) => setting.feature === 'navCurrentPageColor'
   );
 
+  // FOOTER
+  const footerBgColor = settings.find(
+    (setting) => setting.feature === 'footerBgColor'
+  );
+  const footerTextColor = settings.find(
+    (setting) => setting.feature === 'footerTextColor'
+  );
+  const footerButtonsColor = settings.find(
+    (setting) => setting.feature === 'footerButtonsColor'
+  );
+  const footerButtonsHoverColor = settings.find(
+    (setting) => setting.feature === 'footerButtonsHoverColor'
+  );
+  const footerLinksColor = settings.find(
+    (setting) => setting.feature === 'footerLinksColor'
+  );
+  const footerLinksHoverColor = settings.find(
+    (setting) => setting.feature === 'footerLinksHoverColor'
+  );
+  const footer2BgColor = settings.find(
+    (setting) => setting.feature === 'footer2BgColor'
+  );
+  const footer2TextColor = settings.find(
+    (setting) => setting.feature === 'footer2TextColor'
+  );
+
   return (
     <>
       <style jsx global>{`
@@ -42,6 +69,15 @@ const Slug = ({ post, settings }) => {
           --navTextColor: ${navTextColor.value};
           --navHoverColor: ${navHoverColor.value};
           --navCurrentPageColor: ${navCurrentPageColor.value};
+          // Footer
+          --footerBgColor: ${footerBgColor.value};
+          --footerTextColor: ${footerTextColor.value};
+          --footerButtonsColor: ${footerButtonsColor.value};
+          --footerButtonsHoverColor: ${footerButtonsHoverColor.value};
+          --footerLinksColor: ${footerLinksColor.value};
+          --footerLinksHoverColor: ${footerLinksHoverColor.value};
+          --footer2BgColor: ${footer2BgColor.value};
+          --footer2TextColor: ${footer2TextColor.value};
         }
       `}</style>
 
@@ -65,7 +101,7 @@ const Slug = ({ post, settings }) => {
         }}
       />
 
-      <Nav logoImage={logoImage} />
+      <Nav settings={settings} />
       <div className="p-10">
         <h1 className="title">{post.title} </h1>
         <div className="mt-10 min-h-[50vh] font-normal text-base border-gray-500 w-full">
@@ -134,6 +170,7 @@ const Slug = ({ post, settings }) => {
         </div>
         <Author post={post} />
       </div>
+      <Footer settings={settings} />
     </>
   );
 };

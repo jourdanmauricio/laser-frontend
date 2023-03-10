@@ -1,15 +1,28 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaBars } from 'react-icons/fa';
+import {
+  FaBars,
+  FaFacebook,
+  FaInstagramSquare,
+  FaTwitterSquare,
+  FaWhatsappSquare,
+  FaEnvelope,
+} from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 
-const Nav = ({ logoImage }) => {
+const Nav = ({ settings }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const btnMenuRef = useRef();
   const router = useRouter();
 
-  console.log('router.asPath', router.asPath);
+  const logoImage = settings.find((setting) => setting.feature === 'logoImage');
+  const facebook = settings.find((setting) => setting.feature === 'facebook');
+  const instagram = settings.find((setting) => setting.feature === 'instagram');
+  const twitter = settings.find((setting) => setting.feature === 'twitter');
+  const whatsapp = settings.find((setting) => setting.feature === 'whatsapp');
+  const email = settings.find((setting) => setting.feature === 'email');
+  const phone = settings.find((setting) => setting.feature === 'phone');
 
   useEffect(() => {
     const closeMenu = (e) => {
@@ -25,13 +38,56 @@ const Nav = ({ logoImage }) => {
     <>
       <div
         id="inicio"
-        className="h-10 bg-navBgColor text-navTextColor flex items-center justify-end gap-4"
+        className="h-10 bg-navBgColor text-navTextColor flex items-center justify-end gap-4 pr-4"
       >
-        <span className="text-sm">02262-45-4545</span>
-        <span className="text-sm mr-4">laura@gmail.com</span>
+        {phone.value.length > 0 && (
+          <span className="text-sm hidden sm:block">{phone.value}</span>
+        )}
+        {email.value.length > 0 && (
+          <span className="text-sm hidden sm:block mr-4">{email.value}</span>
+        )}
+        {facebook.value.length > 0 && (
+          <Link href={facebook.value} target="_blank" rel="noopener noreferrer">
+            <FaFacebook className="text-gray-600 text-2xl" />
+          </Link>
+        )}
+        {instagram.value.length > 0 && (
+          <Link
+            href={instagram.value}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagramSquare className="text-gray-600 text-2xl" />
+          </Link>
+        )}
+        {twitter.value.length > 0 && (
+          <Link href={twitter.value} target="_blank" rel="noopener noreferrer">
+            <FaTwitterSquare className="text-gray-600 text-2xl" />
+          </Link>
+        )}
+        <div className="flex ml-8 gap-4">
+          {email.value.length > 0 && (
+            <Link
+              href={`mailto:${email.value}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaEnvelope className="text-gray-600 text-2xl" />
+            </Link>
+          )}
+          {whatsapp.value.length > 0 && (
+            <Link
+              href={whatsapp.value}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaWhatsappSquare className="text-gray-600 text-2xl" />
+            </Link>
+          )}
+        </div>
       </div>
       <nav className="menu">
-        <div ref={btnMenuRef}>
+        <div className="lg:hidden" ref={btnMenuRef}>
           <FaBars
             onClick={() => setIsOpenMenu((prev) => !prev)}
             className="text-navTextColor text-2xl menu__icon"

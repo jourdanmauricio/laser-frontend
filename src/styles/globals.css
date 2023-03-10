@@ -14,7 +14,7 @@
 
 html,
 body {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: auto;
   scroll-behavior: smooth;
   /* font-family: var(--raleway-font); */
@@ -34,6 +34,11 @@ a {
 .hero__opacity {
   opacity: var(--heroOpacity);
 }
+
+.about {
+  background-color: var(--aboutBgColor);
+}
+
 @layer base {
   h1 {
     text-align: var(--h1Pos);

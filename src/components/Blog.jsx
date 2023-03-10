@@ -1,10 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Blog = ({ posts }) => {
+const Blog = ({ posts, blogContent }) => {
   return (
-    <section className="py-10 px-5 lg:px-20 text-center">
-      <h2 className="title">Entradas destacadas</h2>
+    <section className="py-10 px-5 lg:px-20 text-center bg-blogBgColor">
+      <div
+        className="relative ql-editor"
+        dangerouslySetInnerHTML={{
+          __html: blogContent.title,
+        }}
+      />
+      <div
+        className="relative ql-editor"
+        dangerouslySetInnerHTML={{
+          __html: blogContent.subsections[0].content,
+        }}
+      />
       {posts.map((post) => (
         <div
           key={post.id}
@@ -28,7 +39,11 @@ const Blog = ({ posts }) => {
           </div>
         </div>
       ))}
-      Visita mi blog
+      <Link href="/blog">
+        <strong>
+          <u>Visita mi blog</u>
+        </strong>
+      </Link>
     </section>
   );
 };

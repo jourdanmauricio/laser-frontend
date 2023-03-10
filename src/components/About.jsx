@@ -1,6 +1,12 @@
 const About = ({ aboutContent }) => {
   return (
-    <section className="py-10 px-5 lg:px-20 text-center" id="nosotros">
+    <section className="py-10 px-5 lg:px-20 text-center about" id="nosotros">
+      <div
+        className="relative ql-editor"
+        dangerouslySetInnerHTML={{
+          __html: aboutContent.title,
+        }}
+      />
       <div
         className="relative ql-editor"
         dangerouslySetInnerHTML={{

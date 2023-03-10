@@ -6,16 +6,15 @@ import Clinics from '../components/Clinics/Clinics';
 import Nav from '../common/Nav';
 import About from '../components/About';
 import { NextSeo } from 'next-seo';
+import Services from '../components/Services/Services';
+import Footer from '../common/Footer/Footer';
 
 export default function Home({ posts, clinics, settings, sections }) {
-  const logoImage = settings.find((setting) => setting.feature === 'logoImage');
   const heroImage = settings.find((setting) => setting.feature === 'heroImage');
-  const heroText = settings.find((setting) => setting.feature === 'heroText');
   const heroOpacity = settings.find(
     (setting) => setting.feature === 'heroOpacity'
   );
   const heroTop = settings.find((setting) => setting.feature === 'heroTop');
-
   const navBgColor = settings.find(
     (setting) => setting.feature === 'navBgColor'
   );
@@ -31,13 +30,47 @@ export default function Home({ posts, clinics, settings, sections }) {
   const bodyBgColor = settings.find(
     (setting) => setting.feature === 'bodyBgColor'
   );
-  const h1Color = settings.find((setting) => setting.feature === 'h1Color');
-  const h1Pos = settings.find((setting) => setting.feature === 'h1Pos');
-  const h2Pos = settings.find((setting) => setting.feature === 'h2Pos');
+  const aboutBgColor = settings.find(
+    (setting) => setting.feature === 'aboutBgColor'
+  );
+  const servicesBgColor = settings.find(
+    (setting) => setting.feature === 'servicesBgColor'
+  );
+  const blogBgColor = settings.find(
+    (setting) => setting.feature === 'blogBgColor'
+  );
 
   const aboutContent = sections.find((section) => section.name === 'about');
+  const servicesContent = sections.find(
+    (section) => section.name === 'services'
+  );
+  const blogContent = sections.find((section) => section.name === 'blog');
 
-  console.log('aboutContent', aboutContent);
+  // FOOTER
+  const footerBgColor = settings.find(
+    (setting) => setting.feature === 'footerBgColor'
+  );
+  const footerTextColor = settings.find(
+    (setting) => setting.feature === 'footerTextColor'
+  );
+  const footerButtonsColor = settings.find(
+    (setting) => setting.feature === 'footerButtonsColor'
+  );
+  const footerButtonsHoverColor = settings.find(
+    (setting) => setting.feature === 'footerButtonsHoverColor'
+  );
+  const footerLinksColor = settings.find(
+    (setting) => setting.feature === 'footerLinksColor'
+  );
+  const footerLinksHoverColor = settings.find(
+    (setting) => setting.feature === 'footerLinksHoverColor'
+  );
+  const footer2BgColor = settings.find(
+    (setting) => setting.feature === 'footer2BgColor'
+  );
+  const footer2TextColor = settings.find(
+    (setting) => setting.feature === 'footer2TextColor'
+  );
 
   return (
     <>
@@ -49,9 +82,19 @@ export default function Home({ posts, clinics, settings, sections }) {
           --navTextColor: ${navTextColor.value};
           --navHoverColor: ${navHoverColor.value};
           --navCurrentPageColor: ${navCurrentPageColor.value};
-          --h1Color: ${h1Color.value};
           --bodyBgColor: ${bodyBgColor.value};
-          --h2Pos: ${h2Pos.value};
+          --aboutBgColor: ${aboutBgColor.value};
+          --servicesBgColor: ${servicesBgColor.value};
+          --blogBgColor: ${blogBgColor.value};
+          // Footer
+          --footerBgColor: ${footerBgColor.value};
+          --footerTextColor: ${footerTextColor.value};
+          --footerButtonsColor: ${footerButtonsColor.value};
+          --footerButtonsHoverColor: ${footerButtonsHoverColor.value};
+          --footerLinksColor: ${footerLinksColor.value};
+          --footerLinksHoverColor: ${footerLinksHoverColor.value};
+          --footer2BgColor: ${footer2BgColor.value};
+          --footer2TextColor: ${footer2TextColor.value};
         }
       `}</style>
       <NextSeo
@@ -73,11 +116,13 @@ export default function Home({ posts, clinics, settings, sections }) {
           ],
         }}
       />
-      <Nav logoImage={logoImage} />
-      <Hero heroImage={heroImage} heroText={heroText} />
+      <Nav settings={settings} />
+      <Hero settings={settings} />
       <About aboutContent={aboutContent} />
-      <Blog posts={posts} />
+      <Services servicesContent={servicesContent} />
+      <Blog posts={posts} blogContent={blogContent} />
       <Clinics clinics={clinics} />
+      <Footer settings={settings} />
     </>
   );
 }
