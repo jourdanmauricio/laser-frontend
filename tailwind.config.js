@@ -20,6 +20,7 @@ module.exports = {
         navTextColor: 'var(--navTextColor)',
         navHoverColor: 'var(--navHoverColor)',
         navCurrentPageColor: 'var(--navCurrentPageColor)',
+        bodyBgColor: 'var(--bodyBgColor)',
         aboutBgColor: 'var(--aboutBgColor)',
         servicesBgColor: 'var(--servicesBgColor)',
         blogBgColor: 'var(--blogBgColor)',

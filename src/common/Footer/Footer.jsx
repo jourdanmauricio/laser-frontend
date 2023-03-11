@@ -122,12 +122,12 @@ const Footer = ({ settings }) => {
 
   return (
     <footer className="bg-footerBgColor text-center text-footerTextColor">
-      <div className="container px-6 pt-6">
+      <div className="mx-auto container px-6 pt-6">
         <div className="mb-6 flex justify-center">
           {facebook?.value.length > 0 && (
             <Link
               className="m-2 h-9 w-9 rounded-full border-2 border-footerButtonsColor uppercase leading-normal text-footerButtonsColor transition duration-150 ease-in-out hover:bg-footerButtonsHoverColor hover:bg-opacity-50 outline-none focus:ring-0 flex justify-center items-center"
-              href="#"
+              href={facebook.value}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -137,7 +137,7 @@ const Footer = ({ settings }) => {
           {instagram?.value.length > 0 && (
             <Link
               className="m-2 h-9 w-9 rounded-full border-2 border-footerButtonsColor uppercase leading-normal text-footerButtonsColor transition duration-150 ease-in-out hover:bg-footerButtonsHoverColor hover:bg-opacity-50 outline-none focus:ring-0 flex justify-center items-center "
-              href="#"
+              href={instagram.value}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -147,7 +147,7 @@ const Footer = ({ settings }) => {
           {twitter?.value.length > 0 && (
             <Link
               className="m-2 h-9 w-9 rounded-full border-2 border-footerButtonsColor uppercase leading-normal text-footerButtonsColor transition duration-150 ease-in-out hover:bg-footerButtonsHoverColor hover:bg-opacity-50 outline-none focus:ring-0 flex justify-center items-center"
-              href="#"
+              href={twitter.value}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -157,7 +157,7 @@ const Footer = ({ settings }) => {
           {whatsapp?.value.length > 0 && (
             <Link
               className="m-2 h-9 w-9 rounded-full border-2 border-footerButtonsColor uppercase leading-normal text-footerButtonsColor transition duration-150 ease-in-out hover:bg-footerButtonsHoverColor hover:bg-opacity-50 outline-none focus:ring-0 flex justify-center items-center"
-              href="#"
+              href={whatsapp.value}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -264,7 +264,7 @@ const Footer = ({ settings }) => {
           )}
         </div>
 
-        <h4 className="mb-2.5 pt-10 font-bold uppercase">Links</h4>
+        <h4 className="mb-2.5 pt-10 font-bold uppercase">Links útiles</h4>
         <div className="grid sm:grid-cols-1 md:grid-cols-2">
           <div className="mb-6">
             <ul className="mb-0 list-none w-fit m-auto text-left">
