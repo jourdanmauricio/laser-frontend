@@ -39,12 +39,16 @@ export default function Home({ posts, clinics, settings, sections }) {
   const blogBgColor = settings.find(
     (setting) => setting.feature === 'blogBgColor'
   );
+  const clinicBgColor = settings.find(
+    (setting) => setting.feature === 'clinicBgColor'
+  );
 
   const aboutContent = sections.find((section) => section.name === 'about');
   const servicesContent = sections.find(
     (section) => section.name === 'services'
   );
   const blogContent = sections.find((section) => section.name === 'blog');
+  const clinicContent = sections.find((section) => section.name === 'clinic');
 
   // FOOTER
   const footerBgColor = settings.find(
@@ -73,6 +77,20 @@ export default function Home({ posts, clinics, settings, sections }) {
   );
 
   console.log('footerLinksColor', footerLinksColor);
+  // METADATA
+  const meta_title = settings.find(
+    (setting) => setting.feature === 'meta_title'
+  );
+
+  const meta_description = settings.find(
+    (setting) => setting.feature === ' meta_description'
+  );
+
+  const meta_canonical = settings.find(
+    (setting) => setting.feature === ' meta_canonical'
+  );
+
+  const meta_url = settings.find((setting) => setting.feature === ' meta_url');
 
   return (
     <>
@@ -88,6 +106,7 @@ export default function Home({ posts, clinics, settings, sections }) {
           --aboutBgColor: ${aboutBgColor.value};
           --servicesBgColor: ${servicesBgColor.value};
           --blogBgColor: ${blogBgColor.value};
+          --clinicBgColor: ${clinicBgColor.value};
           // Footer
           --footerBgColor: ${footerBgColor.value};
           --footerTextColor: ${footerTextColor.value};
@@ -100,17 +119,17 @@ export default function Home({ posts, clinics, settings, sections }) {
         }
       `}</style>
       <NextSeo
-        title="Doctora Laura Rodriguez"
-        description="Información relacionada mujeres a tener una vida sexual y reproductiva saludable y satisfactoria"
-        canonical="https://hathayogaloberia.ga"
+        title={meta_title?.value}
+        description={meta_description?.value}
+        canonical={meta_canonical?.value}
         openGraph={{
           type: 'website',
-          url: 'https://hathayogaloberia.ga',
+          url: `${meta_url?.value}`,
           // title: 'Open Graph Title',
           // description: 'Open Graph Description',
           images: [
             {
-              url: `${heroImage.value}`,
+              url: `${heroImage?.value}`,
               width: 800,
               height: 600,
               alt: 'Doctora Laura Rodriguez',
@@ -120,10 +139,14 @@ export default function Home({ posts, clinics, settings, sections }) {
       />
       <Nav settings={settings} />
       <Hero settings={settings} />
-      <About aboutContent={aboutContent} />
-      <Services servicesContent={servicesContent} />
-      <Blog posts={posts} blogContent={blogContent} />
-      <Clinics clinics={clinics} />
+      <About settings={settings} aboutContent={aboutContent} />
+      <Services settings={settings} servicesContent={servicesContent} />
+      <Blog settings={settings} posts={posts} blogContent={blogContent} />
+      <Clinics
+        settings={settings}
+        clinics={clinics}
+        clinicContent={clinicContent}
+      />
       <Footer settings={settings} />
     </>
   );

@@ -39,6 +39,10 @@ a {
   background-color: var(--aboutBgColor);
 }
 
+.clinic {
+  background-color: var(--clinicBgColor);
+}
+
 @layer base {
   h1 {
     text-align: var(--h1Pos);

@@ -1,10 +1,17 @@
 import Image from 'next/image';
 
-const Services = ({ servicesContent }) => {
+const Services = ({ settings, servicesContent }) => {
+  const waveServiceShow = settings.find(
+    (setting) => setting.feature === 'waveServiceShow'
+  );
+  const waveService = settings.find(
+    (setting) => setting.feature === 'waveService'
+  );
+
   return (
-    <>
+    <div className="relative ">
       <div
-        className="py-10 px-5 lg:px-20 text-center bg-servicesBgColor"
+        className="px-5 pt-10 pb-28 lg:px-20 text-center bg-servicesBgColor"
         id="servicios"
       >
         <div
@@ -22,16 +29,19 @@ const Services = ({ servicesContent }) => {
             }`}
           >
             <article className="grow-0 shrink-0	basis-full md:basis-1/2">
-              {/* flex-order-1  */}
-              <h2 className="text-center">{subsection.name}</h2>
+              <div
+                className="relative ql-editor p-0 md:p-8"
+                dangerouslySetInnerHTML={{
+                  __html: subsection.name,
+                }}
+              />
+
               <div
                 className="relative ql-editor p-0 md:p-8"
                 dangerouslySetInnerHTML={{
                   __html: subsection.content,
                 }}
               />
-
-              {/* <p className="p-0 md:p-8">{subsection.content}</p> */}
             </article>
             <article className="grow-0 shrink-0	basis-full md:basis-1/2">
               <Image
@@ -45,7 +55,21 @@ const Services = ({ servicesContent }) => {
           </section>
         ))}
       </div>
-    </>
+      {waveServiceShow.value === 'true' && (
+        <div className="absolute bottom-0 left-0 w-full h-[100px] overflow-hidden">
+          <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            className="h-full w-full"
+          >
+            <path
+              d={waveService.value}
+              className="stroke-none fill-blogBgColor"
+            ></path>
+          </svg>
+        </div>
+      )}
+    </div>
   );
 };
 

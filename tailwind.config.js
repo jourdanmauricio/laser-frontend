@@ -24,6 +24,7 @@ module.exports = {
         aboutBgColor: 'var(--aboutBgColor)',
         servicesBgColor: 'var(--servicesBgColor)',
         blogBgColor: 'var(--blogBgColor)',
+        clinicBgColor: 'var(--clinicBgColor)',
         footerBgColor: 'var(--footerBgColor)',
         footerTextColor: 'var(--footerTextColor)',
         footerButtonsColor: 'var(--footerButtonsColor)',

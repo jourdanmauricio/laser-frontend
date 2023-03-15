@@ -1,8 +1,30 @@
-const Clinics = ({ clinics }) => {
+const Clinics = ({ settings, clinics, clinicContent }) => {
+  const waveClinicShow = settings.find(
+    (setting) => setting.feature === 'waveClinicShow'
+  );
+  const waveClinic = settings.find(
+    (setting) => setting.feature === 'waveClinic'
+  );
   return (
-    <section className="py-10 px-5 lg:px-20 text-center">
-      {/* <div className="flex flex-col md:flex-row justify-center items-center gap-8"> */}
-      <div className="flex flex-wrap justify-center items-center gap-8">
+    <section className="relative pt-10 pb-24 px-5 lg:px-20 text-center clinic">
+      <div
+        className="relative ql-editor"
+        dangerouslySetInnerHTML={{
+          __html: clinicContent.title,
+        }}
+      />
+      <div
+        className="relative ql-editor"
+        dangerouslySetInnerHTML={{
+          __html: clinicContent.subsections[0].content,
+        }}
+      />
+
+      <button className="mt-8 border border-gray-500 rounded px-8 py-2">
+        Pedir cita
+      </button>
+
+      <div className="mt-8 flex flex-wrap justify-center items-center gap-8">
         {clinics.map((clinic) => (
           <div
             key={clinic.id}
@@ -29,6 +51,20 @@ const Clinics = ({ clinics }) => {
           </div>
         ))}
       </div>
+      {waveClinicShow.value === 'true' && (
+        <div className="absolute bottom-0 left-0 w-full h-[100px] overflow-hidden">
+          <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            className="h-full w-full"
+          >
+            <path
+              d={waveClinic.value}
+              className="stroke-none fill-footerBgColor"
+            ></path>
+          </svg>
+        </div>
+      )}
     </section>
   );
 };

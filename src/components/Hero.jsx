@@ -3,6 +3,10 @@ import Image from 'next/image';
 const Hero = ({ settings }) => {
   const heroImage = settings.find((setting) => setting.feature === 'heroImage');
   const heroText = settings.find((setting) => setting.feature === 'heroText');
+  const waveHeroShow = settings.find(
+    (setting) => setting.feature === 'waveHeroShow'
+  );
+  const waveHero = settings.find((setting) => setting.feature === 'waveHero');
 
   return (
     <>
@@ -24,18 +28,20 @@ const Hero = ({ settings }) => {
             dangerouslySetInnerHTML={{ __html: heroText.value }}
           />
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-[100px] overflow-hidden">
-          <svg
-            viewBox="0 0 500 150"
-            preserveAspectRatio="none"
-            className="h-full w-full"
-          >
-            <path
-              d="M-0.00,129.78 C246.89,97.22 258.74,97.22 500.27,128.80 L500.00,150.00 L0.00,150.00 Z"
-              className="stroke-none fill-aboutBgColor"
-            ></path>
-          </svg>
-        </div>
+        {waveHeroShow.value === 'true' && (
+          <div className="absolute bottom-0 left-0 w-full h-[100px] opacity-10 overflow-hidden">
+            <svg
+              viewBox="0 0 500 150"
+              preserveAspectRatio="none"
+              className="h-full w-full"
+            >
+              <path
+                d={waveHero.value}
+                className="stroke-none fill-aboutBgColor"
+              ></path>
+            </svg>
+          </div>
+        )}
       </section>
     </>
   );

@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Blog = ({ posts, blogContent }) => {
+const Blog = ({ settings, posts, blogContent }) => {
+  const waveBlogShow = settings.find(
+    (setting) => setting.feature === 'waveBlogShow'
+  );
+  const waveBlog = settings.find((setting) => setting.feature === 'waveBlog');
+
   return (
-    <section className="py-10 px-5 lg:px-20 text-center bg-blogBgColor">
+    <section className="relative pt-10 pb-28 px-5 lg:px-20 text-center bg-blogBgColor">
       <div
         className="relative ql-editor"
         dangerouslySetInnerHTML={{
@@ -44,6 +49,20 @@ const Blog = ({ posts, blogContent }) => {
           <u>Visita mi blog</u>
         </strong>
       </Link>
+      {waveBlogShow.value === 'true' && (
+        <div className="absolute bottom-0 left-0 w-full h-[100px] overflow-hidden">
+          <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            className="h-full w-full"
+          >
+            <path
+              d={waveBlog.value}
+              className="stroke-none fill-clinicBgColor"
+            ></path>
+          </svg>
+        </div>
+      )}
     </section>
   );
 };
