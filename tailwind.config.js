@@ -33,6 +33,7 @@ module.exports = {
         footerLinksHoverColor: 'var(--footerLinksHoverColor)',
         footer2BgColor: 'var(--footer2BgColor)',
         footer2TextColor: 'var(--footer2TextColor)',
+        clinicTextColor: 'var(--clinicTextColor)',
       },
     },
   },

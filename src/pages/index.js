@@ -10,6 +10,7 @@ import Services from '../components/Services/Services';
 import Footer from '../common/Footer/Footer';
 
 export default function Home({ posts, clinics, settings, sections }) {
+  console.log('SETTINGS', settings);
   const heroImage = settings.find((setting) => setting.feature === 'heroImage');
   const heroOpacity = settings.find(
     (setting) => setting.feature === 'heroOpacity'
@@ -76,7 +77,48 @@ export default function Home({ posts, clinics, settings, sections }) {
     (setting) => setting.feature === 'footer2TextColor'
   );
 
-  console.log('footerLinksColor', footerLinksColor);
+  // BTN
+  const clinicBtnTlRadius = settings.find(
+    (setting) => setting.feature === 'clinicBtnTlRadius'
+  );
+  const clinicBtnTrRadius = settings.find(
+    (setting) => setting.feature === 'clinicBtnTrRadius'
+  );
+  const clinicBtnBlRadius = settings.find(
+    (setting) => setting.feature === 'clinicBtnBlRadius'
+  );
+  const clinicBtnBrRadius = settings.find(
+    (setting) => setting.feature === 'clinicBtnBrRadius'
+  );
+  const clinicBtnTextColor = settings.find(
+    (setting) => setting.feature === 'clinicBtnTextColor'
+  );
+  const clinicBtnBg = settings.find(
+    (setting) => setting.feature === 'clinicBtnBg'
+  );
+  const clinicBtnBorderColor = settings.find(
+    (setting) => setting.feature === 'clinicBtnBorderColor'
+  );
+  const clinicBtnShadow = settings.find(
+    (setting) => setting.feature === 'clinicBtnShadow'
+  );
+
+  const clinicBtnTextColorHover = settings.find(
+    (setting) => setting.feature === 'clinicBtnTextColorHover'
+  );
+
+  const clinicBtnBgHover = settings.find(
+    (setting) => setting.feature === 'clinicBtnBgHover'
+  );
+
+  const clinicBtnBorderColorHover = settings.find(
+    (setting) => setting.feature === 'clinicBtnBorderColorHover'
+  );
+
+  const clinicTextColor = settings.find(
+    (setting) => setting.feature === 'clinicTextColor'
+  );
+
   // METADATA
   const meta_title = settings.find(
     (setting) => setting.feature === 'meta_title'
@@ -116,6 +158,24 @@ export default function Home({ posts, clinics, settings, sections }) {
           --footerLinksHoverColor: ${footerLinksHoverColor.value};
           --footer2BgColor: ${footer2BgColor.value};
           --footer2TextColor: ${footer2TextColor.value};
+          // Btn
+          --clinicBtnTlRadius: ${clinicBtnTlRadius.value};
+          --clinicBtnTrRadius: ${clinicBtnTrRadius.value};
+          --clinicBtnBlRadius: ${clinicBtnBlRadius.value};
+          --clinicBtnBrRadius: ${clinicBtnBrRadius.value};
+          --clinicBtnTextColor: ${clinicBtnTextColor.value};
+          --clinicBtnBg: ${clinicBtnBg.value};
+          --clinicBtnBorderColor: ${clinicBtnBorderColor.value};
+          --clinicBtnShadow: ${clinicBtnShadow.value};
+          --clinicBtnTextColorHover: ${clinicBtnTextColorHover.value};
+          --clinicBtnBgHover: ${clinicBtnBgHover.value};
+          --clinicBtnBorderColorHover: ${clinicBtnBorderColorHover.value};
+          --clinicTextColor: ${clinicTextColor.value};
+        }
+        .btn__settings:hover {
+          color: var(--btnTextColorHover);
+          background-color: var(--btnBgHover);
+          border-color: var(--btnBorderColorHover);
         }
       `}</style>
       <NextSeo
@@ -173,6 +233,8 @@ export async function getStaticProps() {
     const clinics = responseClinics.data
       .sort((a, b) => a.order - b.order)
       .filter((post) => post.main === true);
+
+    console.log('SETTINGS', responseSettings.data);
 
     return {
       props: {

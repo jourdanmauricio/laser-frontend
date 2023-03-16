@@ -1,10 +1,26 @@
+import Link from 'next/link';
+
 const Clinics = ({ settings, clinics, clinicContent }) => {
+  console.log('settings', settings);
   const waveClinicShow = settings.find(
     (setting) => setting.feature === 'waveClinicShow'
   );
   const waveClinic = settings.find(
     (setting) => setting.feature === 'waveClinic'
   );
+
+  const clinicBtnShow = settings.find(
+    (setting) => setting.feature === 'clinicBtnShow'
+  );
+
+  const clinicBtnText = settings.find(
+    (setting) => setting.feature === 'clinicBtnText'
+  );
+
+  const clinicBtnLink = settings.find(
+    (setting) => setting.feature === 'clinicBtnLink'
+  );
+
   return (
     <section className="relative pt-10 pb-24 px-5 lg:px-20 text-center clinic">
       <div
@@ -20,15 +36,22 @@ const Clinics = ({ settings, clinics, clinicContent }) => {
         }}
       />
 
-      <button className="mt-8 border border-gray-500 rounded px-8 py-2">
-        Pedir cita
-      </button>
+      {clinicBtnShow.value === 'true' && (
+        <div className="mt-12">
+          <Link
+            href={clinicBtnLink.value}
+            className="border border-solid px-8 py-2 transition ease-in-out delay-100  hover:cursor-pointer btn__clinics"
+          >
+            {clinicBtnText.value}
+          </Link>
+        </div>
+      )}
 
-      <div className="mt-8 flex flex-wrap justify-center items-center gap-8">
+      <div className="mt-20 flex flex-wrap justify-center items-center gap-8 text-clinicTextColor">
         {clinics.map((clinic) => (
           <div
             key={clinic.id}
-            className="min-w-[350px] py-5 px-10 border border-gray-700 flex-grow-0 flex-shrink-0 basis-full sm:basis-1/4"
+            className="min-w-[350px] py-5 px-10 border border-clinicTextColor flex-grow-0 flex-shrink-0 basis-full sm:basis-1/4"
           >
             <p>
               <strong>{clinic.name}</strong>

@@ -43,6 +43,20 @@ a {
   background-color: var(--clinicBgColor);
 }
 
+.btn__clinics {
+  border-radius: var(--clinicBtnTlRadius) var(--clinicBtnTrRadius)
+    var(--clinicBtnBlRadius) var(--clinicBtnBrRadius);
+  color: var(--clinicBtnTextColor);
+  background-color: var(--clinicBtnBg);
+  border-color: var(--clinicBtnBorderColor);
+  box-shadow: var(--clinicBtnShadow);
+}
+.btn__clinics:hover {
+  color: var(--clinicBtnTextColorHover);
+  background-color: var(--clinicBtnBgHover);
+  border-color: var(--clinicBtnBorderColorHover);
+}
+
 @layer base {
   h1 {
     text-align: var(--h1Pos);
