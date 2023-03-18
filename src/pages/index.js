@@ -11,6 +11,7 @@ import Footer from '../common/Footer/Footer';
 
 export default function Home({ posts, clinics, settings, sections }) {
   console.log('SETTINGS', settings);
+  //  HERO
   const heroImage = settings.find((setting) => setting.feature === 'heroImage');
   const heroOpacity = settings.find(
     (setting) => setting.feature === 'heroOpacity'
@@ -31,24 +32,44 @@ export default function Home({ posts, clinics, settings, sections }) {
   const bodyBgColor = settings.find(
     (setting) => setting.feature === 'bodyBgColor'
   );
+
+  const buttonHero = settings.filter((setting) => setting.type === 'heroBtn');
+  const heroBtn = buttonHero.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
+  );
+  console.log('heroBtn', heroBtn);
+
+  // ABOUT
   const aboutBgColor = settings.find(
     (setting) => setting.feature === 'aboutBgColor'
   );
+  const aboutContent = sections.find((section) => section.name === 'about');
+
+  // SERVICES
   const servicesBgColor = settings.find(
     (setting) => setting.feature === 'servicesBgColor'
   );
-  const blogBgColor = settings.find(
-    (setting) => setting.feature === 'blogBgColor'
+  const servicesTextColor = settings.find(
+    (setting) => setting.feature === 'servicesTextColor'
   );
-  const clinicBgColor = settings.find(
-    (setting) => setting.feature === 'clinicBgColor'
-  );
-
-  const aboutContent = sections.find((section) => section.name === 'about');
   const servicesContent = sections.find(
     (section) => section.name === 'services'
   );
+
+  // ENTRADAS
+  const blogBgColor = settings.find(
+    (setting) => setting.feature === 'blogBgColor'
+  );
+  const blogTextColor = settings.find(
+    (setting) => setting.feature === 'blogTextColor'
+  );
   const blogContent = sections.find((section) => section.name === 'blog');
+
+  // CONSULTORIOS
+  const clinicBgColor = settings.find(
+    (setting) => setting.feature === 'clinicBgColor'
+  );
   const clinicContent = sections.find((section) => section.name === 'clinic');
 
   // FOOTER
@@ -77,46 +98,24 @@ export default function Home({ posts, clinics, settings, sections }) {
     (setting) => setting.feature === 'footer2TextColor'
   );
 
-  // BTN
-  const clinicBtnTlRadius = settings.find(
-    (setting) => setting.feature === 'clinicBtnTlRadius'
+  // CLINICBTN
+  const butonclinic = settings.filter(
+    (setting) => setting.type === 'clinicBtn'
   );
-  const clinicBtnTrRadius = settings.find(
-    (setting) => setting.feature === 'clinicBtnTrRadius'
-  );
-  const clinicBtnBlRadius = settings.find(
-    (setting) => setting.feature === 'clinicBtnBlRadius'
-  );
-  const clinicBtnBrRadius = settings.find(
-    (setting) => setting.feature === 'clinicBtnBrRadius'
-  );
-  const clinicBtnTextColor = settings.find(
-    (setting) => setting.feature === 'clinicBtnTextColor'
-  );
-  const clinicBtnBg = settings.find(
-    (setting) => setting.feature === 'clinicBtnBg'
-  );
-  const clinicBtnBorderColor = settings.find(
-    (setting) => setting.feature === 'clinicBtnBorderColor'
-  );
-  const clinicBtnShadow = settings.find(
-    (setting) => setting.feature === 'clinicBtnShadow'
-  );
-
-  const clinicBtnTextColorHover = settings.find(
-    (setting) => setting.feature === 'clinicBtnTextColorHover'
-  );
-
-  const clinicBtnBgHover = settings.find(
-    (setting) => setting.feature === 'clinicBtnBgHover'
-  );
-
-  const clinicBtnBorderColorHover = settings.find(
-    (setting) => setting.feature === 'clinicBtnBorderColorHover'
+  const clinicBtn = butonclinic.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
   );
 
   const clinicTextColor = settings.find(
     (setting) => setting.feature === 'clinicTextColor'
+  );
+
+  // BLOGBTN
+  const butonBlog = settings.filter((setting) => setting.type === 'blogBtn');
+  const blogBtn = butonBlog.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
   );
 
   // METADATA
@@ -134,21 +133,76 @@ export default function Home({ posts, clinics, settings, sections }) {
 
   const meta_url = settings.find((setting) => setting.feature === ' meta_url');
 
+  console.log('clinicBtn', clinicBtn);
+  console.log('blogBtn.tlRadius.value', blogBtn.tlRadius.value);
   return (
     <>
       <style jsx global>{`
         :root {
+          // Hero
           --heroTop: ${heroTop.value};
           --heroOpacity: ${heroOpacity.value};
+          --heroBtnTlRadius: ${heroBtn.tlRadius.value};
+          --heroBtnTrRadius: ${heroBtn.trRadius.value};
+          --heroBtnBlRadius: ${heroBtn.blRadius.value};
+          --heroBtnBrRadius: ${heroBtn.brRadius.value};
+          --heroBtnBorder: ${heroBtn.border.value};
+          --heroBtnWidth: ${heroBtn.width.value};
+          --heroBtnHeight: ${heroBtn.height.value};
+          --heroBtnTextColor: ${heroBtn.textColor.value};
+          --heroBtnBgColor: ${heroBtn.bgColor.value};
+          --heroBtnBorderColor: ${heroBtn.borderColor.value};
+          --heroBtnShadow: ${heroBtn.shadow.value};
+          --heroBtnTextColorHover: ${heroBtn.textColorHover.value};
+          --heroBtnBgColorHover: ${heroBtn.bgColorHover.value};
+          --heroBtnBorderColorHover: ${heroBtn.borderColorHover.value};
+          // Menu
           --navBgColor: ${navBgColor.value};
           --navTextColor: ${navTextColor.value};
           --navHoverColor: ${navHoverColor.value};
           --navCurrentPageColor: ${navCurrentPageColor.value};
           --bodyBgColor: ${bodyBgColor.value};
+          // About
           --aboutBgColor: ${aboutBgColor.value};
+          // Service
           --servicesBgColor: ${servicesBgColor.value};
+          --servicesTextColor: ${servicesTextColor.value};
+          // Entradas
           --blogBgColor: ${blogBgColor.value};
+          --blogTextColor: ${blogTextColor.value};
+          --blogBtnTlRadius: ${blogBtn.tlRadius.value};
+          --blogBtnTrRadius: ${blogBtn.trRadius.value};
+          --blogBtnBlRadius: ${blogBtn.blRadius.value};
+          --blogBtnBrRadius: ${blogBtn.brRadius.value};
+          --blogBtnBorder: ${blogBtn.border.value};
+          --blogBtnWidth: ${blogBtn.width.value};
+          --blogBtnHeight: ${blogBtn.height.value};
+          --blogBtnTextColor: ${blogBtn.textColor.value};
+          --blogBtnBgColor: ${blogBtn.bgColor.value};
+          --blogBtnBorderColor: ${blogBtn.borderColor.value};
+          --blogBtnShadow: ${blogBtn.shadow.value};
+          --blogBtnTextColorHover: ${blogBtn.textColorHover.value};
+          --blogBtnBgColorHover: ${blogBtn.bgColorHover.value};
+          --blogBtnBorderColorHover: ${blogBtn.borderColorHover.value};
+
+          // Consultorios
           --clinicBgColor: ${clinicBgColor.value};
+          --clinicTextColor: ${clinicTextColor.value};
+          --clinicBtnTlRadius: ${clinicBtn.tlRadius.value};
+          --clinicBtnTrRadius: ${clinicBtn.trRadius.value};
+          --clinicBtnBlRadius: ${clinicBtn.blRadius.value};
+          --clinicBtnBrRadius: ${clinicBtn.brRadius.value};
+          --clinicBtnBorder: ${clinicBtn.border.value};
+          --clinicBtnWidth: ${clinicBtn.width.value};
+          --clinicBtnHeight: ${clinicBtn.height.value};
+          --clinicBtnTextColor: ${clinicBtn.textColor.value};
+          --clinicBtnBgColor: ${clinicBtn.bgColor.value};
+          --clinicBtnBorderColor: ${clinicBtn.borderColor.value};
+          --clinicBtnShadow: ${clinicBtn.shadow.value};
+          --clinicBtnTextColorHover: ${clinicBtn.textColorHover.value};
+          --clinicBtnBgColorHover: ${clinicBtn.bgColorHover.value};
+          --clinicBtnBorderColorHover: ${clinicBtn.borderColorHover.value};
+
           // Footer
           --footerBgColor: ${footerBgColor.value};
           --footerTextColor: ${footerTextColor.value};
@@ -158,24 +212,6 @@ export default function Home({ posts, clinics, settings, sections }) {
           --footerLinksHoverColor: ${footerLinksHoverColor.value};
           --footer2BgColor: ${footer2BgColor.value};
           --footer2TextColor: ${footer2TextColor.value};
-          // Btn
-          --clinicBtnTlRadius: ${clinicBtnTlRadius.value};
-          --clinicBtnTrRadius: ${clinicBtnTrRadius.value};
-          --clinicBtnBlRadius: ${clinicBtnBlRadius.value};
-          --clinicBtnBrRadius: ${clinicBtnBrRadius.value};
-          --clinicBtnTextColor: ${clinicBtnTextColor.value};
-          --clinicBtnBg: ${clinicBtnBg.value};
-          --clinicBtnBorderColor: ${clinicBtnBorderColor.value};
-          --clinicBtnShadow: ${clinicBtnShadow.value};
-          --clinicBtnTextColorHover: ${clinicBtnTextColorHover.value};
-          --clinicBtnBgHover: ${clinicBtnBgHover.value};
-          --clinicBtnBorderColorHover: ${clinicBtnBorderColorHover.value};
-          --clinicTextColor: ${clinicTextColor.value};
-        }
-        .btn__settings:hover {
-          color: var(--btnTextColorHover);
-          background-color: var(--btnBgHover);
-          border-color: var(--btnBorderColorHover);
         }
       `}</style>
       <NextSeo
@@ -185,8 +221,6 @@ export default function Home({ posts, clinics, settings, sections }) {
         openGraph={{
           type: 'website',
           url: `${meta_url?.value}`,
-          // title: 'Open Graph Title',
-          // description: 'Open Graph Description',
           images: [
             {
               url: `${heroImage?.value}`,
@@ -198,12 +232,18 @@ export default function Home({ posts, clinics, settings, sections }) {
         }}
       />
       <Nav settings={settings} />
-      <Hero settings={settings} />
+      <Hero settings={settings} heroBtn={heroBtn} />
       <About settings={settings} aboutContent={aboutContent} />
       <Services settings={settings} servicesContent={servicesContent} />
-      <Blog settings={settings} posts={posts} blogContent={blogContent} />
+      <Blog
+        settings={settings}
+        blogBtn={blogBtn}
+        posts={posts}
+        blogContent={blogContent}
+      />
       <Clinics
         settings={settings}
+        clinicBtn={clinicBtn}
         clinics={clinics}
         clinicContent={clinicContent}
       />

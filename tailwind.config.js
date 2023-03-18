@@ -12,8 +12,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        raleway: ['var(--raleway-font)', ...fontFamily.sans],
-        quicksand: ['var(--quicksand-font)', ...fontFamily.sans],
+        roboto: ['var(--roboto-font)', ...fontFamily.sans],
+        montserrat: ['var(--montserrat-font)', ...fontFamily.sans],
       },
       colors: {
         navBgColor: 'var(--navBgColor)',
@@ -23,8 +23,11 @@ module.exports = {
         bodyBgColor: 'var(--bodyBgColor)',
         aboutBgColor: 'var(--aboutBgColor)',
         servicesBgColor: 'var(--servicesBgColor)',
+        servicesTextColor: 'var(--servicesTextColor)',
         blogBgColor: 'var(--blogBgColor)',
+        blogTextColor: 'var(--blogTextColor)',
         clinicBgColor: 'var(--clinicBgColor)',
+        clinicTextColor: 'var(--clinicTextColor)',
         footerBgColor: 'var(--footerBgColor)',
         footerTextColor: 'var(--footerTextColor)',
         footerButtonsColor: 'var(--footerButtonsColor)',
@@ -33,7 +36,6 @@ module.exports = {
         footerLinksHoverColor: 'var(--footerLinksHoverColor)',
         footer2BgColor: 'var(--footer2BgColor)',
         footer2TextColor: 'var(--footer2TextColor)',
-        clinicTextColor: 'var(--clinicTextColor)',
       },
     },
   },

@@ -9,7 +9,7 @@ const Services = ({ settings, servicesContent }) => {
   );
 
   return (
-    <div className="relative ">
+    <section className="relative ">
       <div
         className="px-5 pt-10 pb-28 lg:px-20 text-center bg-servicesBgColor"
         id="servicios"
@@ -22,37 +22,34 @@ const Services = ({ settings, servicesContent }) => {
         />
 
         {servicesContent.subsections.map((subsection, index) => (
-          <section
+          <article
             key={subsection.id}
-            className={`mt-10 flex flex-wrap items-center justify-center ${
-              index % 2 == 0 ? 'flex-row-reverse' : ''
-            }`}
+            className="mt-10 pb-10 min-h-[50vh] font-normal text-base border-b-servicesTextColor   border-b last:border-0 w-full"
           >
-            <article className="grow-0 shrink-0	basis-full md:basis-1/2">
-              <div
-                className="relative ql-editor p-0 md:p-8"
-                dangerouslySetInnerHTML={{
-                  __html: subsection.name,
-                }}
-              />
-
-              <div
-                className="relative ql-editor p-0 md:p-8"
-                dangerouslySetInnerHTML={{
-                  __html: subsection.content,
-                }}
-              />
-            </article>
-            <article className="grow-0 shrink-0	basis-full md:basis-1/2">
+            <div
+              className={`float-none md:pr-10 md:pb-10 ${
+                index % 2 == 0 ? 'md:float-left' : 'md:float-right'
+              }`}
+            >
               <Image
-                className="mx-auto"
+                className="mx-auto shadow-xl"
                 src={subsection.image}
-                alt={subsection.alt_image}
                 width={400}
                 height={400}
+                alt={subsection.alt_image}
               />
-            </article>
-          </section>
+            </div>
+            <div>
+              <div
+                className="relative ql-editor"
+                dangerouslySetInnerHTML={{ __html: subsection.name }}
+              />
+              <div
+                className="relative ql-editor"
+                dangerouslySetInnerHTML={{ __html: subsection.content }}
+              />
+            </div>
+          </article>
         ))}
       </div>
       {waveServiceShow.value === 'true' && (
@@ -69,7 +66,7 @@ const Services = ({ settings, servicesContent }) => {
           </svg>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

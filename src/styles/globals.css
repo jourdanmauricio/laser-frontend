@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --gray-very-ligth: '#e2e8f0';
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -18,8 +14,9 @@ body {
   margin: auto;
   scroll-behavior: smooth;
   /* font-family: var(--raleway-font); */
-  font-family: var(--quicksand-font);
+  font-family: var(--montserrat-font);
   background-color: var(--bodyBgColor);
+  font-size: 18px;
 }
 
 a {
@@ -27,8 +24,28 @@ a {
   text-decoration: none;
 }
 
-.hero__top {
+.hero__pos {
   top: var(--heroTop);
+}
+
+.btn__hero {
+  color: var(--heroBtnTextColor);
+  background-color: var(--heroBtnBgColor);
+  height: var(--heroBtnHeight);
+  width: var(--heroBtnWidth);
+  border-width: var(--heroBtnBorder);
+  border-color: var(--heroBtnBorderColor);
+  box-shadow: var(--heroBtnShadow);
+  border-radius: var(--heroBtnTlRadius) var(--heroBtnTrRadius)
+    var(--heroBtnBlRadius) var(--heroBtnBrRadius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn__hero:hover {
+  color: var(--heroBtnTextColorHover);
+  background-color: var(--heroBtnBgColorHover);
+  border-color: var(--heroBtnBorderColorHover);
 }
 
 .hero__opacity {
@@ -43,31 +60,57 @@ a {
   background-color: var(--clinicBgColor);
 }
 
+.btn__blog {
+  color: var(--blogBtnTextColor);
+  background-color: var(--blogBtnBgColor);
+  height: var(--blogBtnHeight);
+  width: var(--blogBtnWidth);
+  border-width: var(--blogBtnBorder);
+  border-radius: var(--blogBtnTlRadius) var(--blogBtnTrRadius)
+    var(--blogBtnBlRadius) var(--blogBtnBrRadius);
+  border-color: var(--blogBtnBorderColor);
+  box-shadow: var(--blogBtnShadow);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn__blog:hover {
+  color: var(--clinicBtnTextColorHover);
+  background-color: var(--clinicBtnBgColorHover);
+  border-color: var(--clinicBtnBorderColorHover);
+}
+
 .btn__clinics {
+  color: var(--clinicBtnTextColor);
+  background-color: var(--clinicBtnBgColor);
+  height: var(--clinicBtnHeight);
+  width: var(--clinicBtnWidth);
+  border-width: var(--clinicBtnBorder);
   border-radius: var(--clinicBtnTlRadius) var(--clinicBtnTrRadius)
     var(--clinicBtnBlRadius) var(--clinicBtnBrRadius);
-  color: var(--clinicBtnTextColor);
-  background-color: var(--clinicBtnBg);
   border-color: var(--clinicBtnBorderColor);
   box-shadow: var(--clinicBtnShadow);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn__clinics:hover {
   color: var(--clinicBtnTextColorHover);
-  background-color: var(--clinicBtnBgHover);
+  background-color: var(--clinicBtnBgColorHover);
   border-color: var(--clinicBtnBorderColorHover);
 }
 
 @layer base {
   h1 {
     text-align: var(--h1Pos);
-    @apply mx-0 my-[0.67em] block text-[3em];
+    @apply mx-0 my-[0.67em] block text-[3em] font-roboto;
   }
   h2 {
     text-align: var(--h2Pos);
-    @apply mx-0 my-[0.83em] block text-[2em];
+    @apply mx-0 my-[0.83em] block text-[2em] font-roboto;
   }
   h3 {
-    @apply mx-0 my-[1em] block text-[1.17em];
+    @apply mx-0 my-[1em] block text-[1.17em] font-roboto;
   }
   h4 {
     @apply mx-0 my-[1.33em] block text-base;
@@ -197,5 +240,44 @@ a {
   }
   .menu__mobile-item {
     @apply no-underline text-black font-normal px-6 py-6 block;
+  }
+
+  /* FLIP CARD */
+  .flip-card {
+    position: relative;
+    /* border: thick solid #000; */
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-bottom: 5rem; */
+    width: 350px;
+    height: 210px;
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
+    perspective: 10rem;
+    transform-style: preserve-3d;
+  }
+  .flip-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .flip-card {
+    transform-origin: center right;
+  }
+  .flip-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  .flip-front {
+    transform: rotateY(0deg);
+  }
+  .flip-back {
+    transform: rotateY(180deg);
+  }
+  .flip-card:hover {
+    transform: translateX(-100%) rotateY(-180deg);
   }
 }

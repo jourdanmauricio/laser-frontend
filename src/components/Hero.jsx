@@ -1,8 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
-const Hero = ({ settings }) => {
+const Hero = ({ settings, heroBtn }) => {
   const heroImage = settings.find((setting) => setting.feature === 'heroImage');
   const heroText = settings.find((setting) => setting.feature === 'heroText');
+  const heroPosX = settings.find((setting) => setting.feature === 'heroPosX');
+
   const waveHeroShow = settings.find(
     (setting) => setting.feature === 'waveHeroShow'
   );
@@ -22,11 +25,27 @@ const Hero = ({ settings }) => {
         </div>
         <div className="absolute h-full w-full top-0 bg-black hero__opacity"></div>
 
-        <div className="absolute text-center hero__top left-1/2 w-full p-10 -translate-x-2/4 -translate-y-2/4">
+        <div
+          className={`z-10 absolute hero__pos text-center w-max ${
+            heroPosX.value === 'right'
+              ? 'right-0'
+              : heroPosX.value === 'left'
+              ? 'left-0'
+              : 'left-1/2 -translate-x-2/4'
+          } `}
+        >
           <div
             className="relative ql-editor"
             dangerouslySetInnerHTML={{ __html: heroText.value }}
           />
+          {heroBtn.show.value === 'true' && (
+            <Link
+              className="border border-solid transition ease-in-out delay-100  hover:cursor-pointer btn__hero mx-auto"
+              href={heroBtn.link.value}
+            >
+              {heroBtn.text.value}
+            </Link>
+          )}
         </div>
         {waveHeroShow.value === 'true' && (
           <div className="absolute bottom-0 left-0 w-full h-[100px]  overflow-hidden">

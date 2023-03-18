@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Blog = ({ settings, posts, blogContent }) => {
+const Blog = ({ settings, blogBtn, posts, blogContent }) => {
   const waveBlogShow = settings.find(
     (setting) => setting.feature === 'waveBlogShow'
   );
@@ -21,10 +21,12 @@ const Blog = ({ settings, posts, blogContent }) => {
           __html: blogContent.subsections[0].content,
         }}
       />
-      {posts.map((post) => (
-        <div
+      {posts.map((post, index) => (
+        <article
           key={post.id}
-          className="flex flex-col justify-center items-center sm:flex-row gap-10 p-10 border-b border-solid border-gray-500"
+          className={`flex flex-col justify-center items-center sm:flex-row gap-10 p-10 border-blogTextColor  ${
+            posts.length === index + 1 ? 'last:border-0' : 'border-b'
+          } w-full`}
         >
           <div>
             <Image
@@ -36,19 +38,26 @@ const Blog = ({ settings, posts, blogContent }) => {
           </div>
 
           <div className="flex flex-col justify-between w-full">
-            <h2 className="text-center text-2xl font-medium">{post.title}</h2>
+            <h3 className="text-center text-2xl font-medium">{post.title}</h3>
             <p className="text-left line-clamp-2 my-4">{post.resume}</p>
             <Link href={`/blog/${post.slug}`}>
               <strong className="hover:underline">Ver más</strong>
             </Link>
           </div>
-        </div>
+        </article>
       ))}
-      <Link href="/blog">
-        <strong>
-          <u>Visita mi blog</u>
-        </strong>
-      </Link>
+
+      {blogBtn.show.value === 'true' && (
+        <div className="mt-12">
+          <Link
+            href={blogBtn.link.value}
+            className="border border-solid transition ease-in-out delay-100 hover:cursor-pointer btn__blog"
+          >
+            {blogBtn.text.value}
+          </Link>
+        </div>
+      )}
+
       {waveBlogShow.value === 'true' && (
         <div className="absolute bottom-0 left-0 w-full h-[100px] overflow-hidden">
           <svg
