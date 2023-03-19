@@ -28,6 +28,8 @@ module.exports = {
         blogTextColor: 'var(--blogTextColor)',
         clinicBgColor: 'var(--clinicBgColor)',
         clinicTextColor: 'var(--clinicTextColor)',
+        testimonialsBgColor: 'var(--testimonialsBgColor)',
+        testimonialsTextColor: 'var(--testimonialsTextColor)',
         footerBgColor: 'var(--footerBgColor)',
         footerTextColor: 'var(--footerTextColor)',
         footerButtonsColor: 'var(--footerButtonsColor)',

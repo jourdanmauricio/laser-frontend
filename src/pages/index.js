@@ -8,9 +8,15 @@ import About from '../components/About';
 import { NextSeo } from 'next-seo';
 import Services from '../components/Services/Services';
 import Footer from '../common/Footer/Footer';
+import Testimonials from '../components/Testimonials';
 
-export default function Home({ posts, clinics, settings, sections }) {
-  console.log('SETTINGS', settings);
+export default function Home({
+  posts,
+  clinics,
+  settings,
+  sections,
+  testimonials,
+}) {
   //  HERO
   const heroImage = settings.find((setting) => setting.feature === 'heroImage');
   const heroOpacity = settings.find(
@@ -38,7 +44,6 @@ export default function Home({ posts, clinics, settings, sections }) {
     (obj, cur) => ({ ...obj, [cur.feature]: cur }),
     {}
   );
-  console.log('heroBtn', heroBtn);
 
   // ABOUT
   const aboutBgColor = settings.find(
@@ -71,6 +76,18 @@ export default function Home({ posts, clinics, settings, sections }) {
     (setting) => setting.feature === 'clinicBgColor'
   );
   const clinicContent = sections.find((section) => section.name === 'clinic');
+
+  // TESTIMONIALS
+  const testimonialsBgColor = settings.find(
+    (setting) => setting.feature === 'testimonialsBgColor'
+  );
+  const testimonialsTextColor = settings.find(
+    (setting) => setting.feature === 'testimonialsTextColor'
+  );
+
+  const testimonialsContent = sections.find(
+    (section) => section.name === 'testimonials'
+  );
 
   // FOOTER
   const footerBgColor = settings.find(
@@ -133,8 +150,6 @@ export default function Home({ posts, clinics, settings, sections }) {
 
   const meta_url = settings.find((setting) => setting.feature === ' meta_url');
 
-  console.log('clinicBtn', clinicBtn);
-  console.log('blogBtn.tlRadius.value', blogBtn.tlRadius.value);
   return (
     <>
       <style jsx global>{`
@@ -203,6 +218,10 @@ export default function Home({ posts, clinics, settings, sections }) {
           --clinicBtnBgColorHover: ${clinicBtn.bgColorHover.value};
           --clinicBtnBorderColorHover: ${clinicBtn.borderColorHover.value};
 
+          // testimonials
+          --testimonialsBgColor: ${testimonialsBgColor.value};
+          --testimonialsTextColor: ${testimonialsTextColor.value};
+
           // Footer
           --footerBgColor: ${footerBgColor.value};
           --footerTextColor: ${footerTextColor.value};
@@ -247,6 +266,11 @@ export default function Home({ posts, clinics, settings, sections }) {
         clinics={clinics}
         clinicContent={clinicContent}
       />
+      <Testimonials
+        settings={settings}
+        testimonials={testimonials}
+        testimonialsContent={testimonialsContent}
+      />
       <Footer settings={settings} />
     </>
   );
@@ -266,6 +290,9 @@ export async function getStaticProps() {
     const API_SECTIONS = `${process.env.NEXT_PUBLIC_API_BACKEND}/sections`;
     const responseSections = await axios(API_SECTIONS);
 
+    const API_TESTIMONIALS = `${process.env.NEXT_PUBLIC_API_BACKEND}/testimonials`;
+    const responseTestimonials = await axios(API_TESTIMONIALS);
+
     const posts = responsePosts.data
       .sort((a, b) => b.order - a.order)
       .filter((post) => post.main === true);
@@ -274,7 +301,9 @@ export async function getStaticProps() {
       .sort((a, b) => a.order - b.order)
       .filter((post) => post.main === true);
 
-    console.log('SETTINGS', responseSettings.data);
+    const testimonials = responseTestimonials.data.sort(
+      (a, b) => a.order - b.order
+    );
 
     return {
       props: {
@@ -282,6 +311,7 @@ export async function getStaticProps() {
         clinics,
         settings: responseSettings.data,
         sections: responseSections.data,
+        testimonials,
       },
     };
   } catch (error) {

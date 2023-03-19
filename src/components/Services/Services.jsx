@@ -27,8 +27,10 @@ const Services = ({ settings, servicesContent }) => {
             className="mt-10 pb-10 min-h-[50vh] font-normal text-base border-b-servicesTextColor   border-b last:border-0 w-full"
           >
             <div
-              className={`float-none md:pr-10 md:pb-10 ${
-                index % 2 == 0 ? 'md:float-left' : 'md:float-right'
+              className={`float-none md:pb-10 ${
+                index % 2 == 0
+                  ? 'md:float-left md:pr-10'
+                  : 'md:float-right md:pl-10'
               }`}
             >
               <Image

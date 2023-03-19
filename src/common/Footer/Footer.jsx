@@ -64,7 +64,6 @@ const Footer = ({ settings }) => {
         ...error,
         [name]: textError,
       });
-      console.log('textError', textError);
     } else {
       setError({
         ...error,
@@ -91,7 +90,6 @@ const Footer = ({ settings }) => {
     for (let field of fields) {
       if (suscribe[field].trim() === '') {
         formError = true;
-        console.log('nulo', field);
         fieldsErrors = {
           ...fieldsErrors,
           [field]: 'Requerido',

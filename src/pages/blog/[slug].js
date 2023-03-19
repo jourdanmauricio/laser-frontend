@@ -181,7 +181,6 @@ export const getStaticProps = async ({ params }) => {
   const slug = params?.slug;
 
   if (typeof slug !== 'string') {
-    console.log('param slug is not string');
     return {
       // flag next js parametros incorrectos
       notFound: true,
@@ -202,7 +201,6 @@ export const getStaticProps = async ({ params }) => {
       },
     };
   } catch (error) {
-    console.log('getStaticProps ERROR', error);
     return {
       notFound: true,
     };

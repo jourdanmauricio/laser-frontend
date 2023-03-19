@@ -26,7 +26,7 @@ const Hero = ({ settings, heroBtn }) => {
         <div className="absolute h-full w-full top-0 bg-black hero__opacity"></div>
 
         <div
-          className={`z-10 absolute hero__pos text-center w-max ${
+          className={`z-10 absolute hero__pos text-center sm:w-max text-md lg:text-lg -translate-y-1/2 sm:translate-y-0 ${
             heroPosX.value === 'right'
               ? 'right-0'
               : heroPosX.value === 'left'

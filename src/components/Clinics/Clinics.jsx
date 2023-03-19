@@ -2,25 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Clinics = ({ settings, clinicBtn, clinics, clinicContent }) => {
-  console.log('settings', settings);
   const waveClinicShow = settings.find(
     (setting) => setting.feature === 'waveClinicShow'
   );
   const waveClinic = settings.find(
     (setting) => setting.feature === 'waveClinic'
   );
-
-  // const clinicBtnShow = settings.find(
-  //   (setting) => setting.feature === 'clinicBtnShow'
-  // );
-
-  // const clinicBtnText = settings.find(
-  //   (setting) => setting.feature === 'clinicBtnText'
-  // );
-
-  // const clinicBtnLink = settings.find(
-  //   (setting) => setting.feature === 'clinicBtnLink'
-  // );
 
   return (
     <section className="relative pt-10 pb-24 px-5 lg:px-20 text-center clinic">
@@ -102,7 +89,7 @@ const Clinics = ({ settings, clinicBtn, clinics, clinicContent }) => {
           >
             <path
               d={waveClinic.value}
-              className="stroke-none fill-footerBgColor"
+              className="stroke-none fill-testimonialsBgColor"
             ></path>
           </svg>
         </div>

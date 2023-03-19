@@ -24,8 +24,6 @@ const Contact = ({ settings, clinics }) => {
   const email = settings.find((setting) => setting.feature === 'email');
   const phone = settings.find((setting) => setting.feature === 'phone');
 
-  console.log('Clinics', clinics);
-
   const [contact, setContact] = useState({
     name: '',
     email: '',
@@ -83,7 +81,6 @@ const Contact = ({ settings, clinics }) => {
         ...error,
         [name]: textError,
       });
-      console.log('textError', textError);
     } else {
       setError({
         ...error,
@@ -415,8 +412,6 @@ export async function getStaticProps() {
 
     const API_CLINICS = `${process.env.NEXT_PUBLIC_API_BACKEND}/clinics`;
     const responseClinics = await axios(API_CLINICS);
-
-    // console.log('POSTS BLOG getStaticProps', posts);
 
     const clinics = responseClinics.data
       .sort((a, b) => a.order - b.order)
