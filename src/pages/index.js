@@ -28,11 +28,6 @@ export default function Home({
     (setting) => setting.feature === 'bodyBgColor'
   );
 
-  // // SERVICES
-  // const servicesContent = sections.find(
-  //   (section) => section.name === 'services'
-  // );
-
   // METADATA
   const dataMeta = settings.filter((setting) => setting.type === 'metadata');
   const metadata = dataMeta.reduce(

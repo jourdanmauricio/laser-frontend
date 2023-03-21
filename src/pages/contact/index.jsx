@@ -139,11 +139,6 @@ const Contact = ({ settings, clinics }) => {
     <>
       <style jsx global>{`
         :root {
-          --navBgColor: ${navBgColor.value};
-          --navTextColor: ${navTextColor.value};
-          --navHoverColor: ${navHoverColor.value};
-          --navCurrentPageColor: ${navCurrentPageColor.value};
-          --bodyBgColor: ${bodyBgColor.value};
           // CONTACT
           --heroBgColor: ${pageContact.heroBgColor.value};
           --bgColor: ${pageContact.bgColor.value};
