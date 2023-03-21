@@ -16,14 +16,6 @@ const Nav = ({ settings }) => {
   const btnMenuRef = useRef();
   const router = useRouter();
 
-  const logoImage = settings.find((setting) => setting.feature === 'logoImage');
-  const facebook = settings.find((setting) => setting.feature === 'facebook');
-  const instagram = settings.find((setting) => setting.feature === 'instagram');
-  const twitter = settings.find((setting) => setting.feature === 'twitter');
-  const whatsapp = settings.find((setting) => setting.feature === 'whatsapp');
-  const email = settings.find((setting) => setting.feature === 'email');
-  const phone = settings.find((setting) => setting.feature === 'phone');
-
   useEffect(() => {
     const closeMenu = (e) => {
       if (!btnMenuRef.current?.contains(e.target)) setIsOpenMenu(false);
@@ -34,54 +26,96 @@ const Nav = ({ settings }) => {
     return () => document.body.removeEventListener('click', closeMenu);
   }, []);
 
+  // MENU
+  const navMenu = settings.filter((setting) => setting.type === 'menu');
+  const menu = navMenu.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
+  );
+  // LOGO
+  const navLogo = settings.filter((setting) => setting.type === 'logo');
+  const logo = navLogo.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
+  );
+
+  // CONTACT
+  const contactData = settings.filter(
+    (setting) => setting.type === 'contactData'
+  );
+  const contact = contactData.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
+  );
+
   return (
     <>
+      <style jsx global>{`
+        :root {
+          // Menu
+          --navBgColor: ${menu.bgColor.value};
+          --navTextColor: ${menu.textColor.value};
+          --navHoverColor: ${menu.hoverColor.value};
+          --navCurrentPageColor: ${menu.currentPageColor.value};
+        }
+      `}</style>
+
       <div
         id="inicio"
-        className="h-10 bg-navBgColor text-navTextColor flex items-center justify-end gap-4 pr-4"
+        className="h-10 bg-navBgColor text-sm text-navTextColor flex items-center justify-end gap-4 pr-4"
       >
-        {phone.value.length > 0 && (
-          <span className="text-sm hidden sm:block">{phone.value}</span>
+        {contact.phone.value.length > 0 && (
+          <span className="text-sm hidden sm:block">{contact.phone.value}</span>
         )}
-        {email.value.length > 0 && (
-          <span className="text-sm hidden sm:block mr-4">{email.value}</span>
+        {contact.email.value.length > 0 && (
+          <span className="text-sm hidden sm:block mr-4">
+            {contact.email.value}
+          </span>
         )}
-        {facebook.value.length > 0 && (
-          <Link href={facebook.value} target="_blank" rel="noopener noreferrer">
-            <FaFacebook className="text-gray-600 text-2xl" />
-          </Link>
-        )}
-        {instagram.value.length > 0 && (
+        {contact.facebook.value.length > 0 && (
           <Link
-            href={instagram.value}
+            href={contact.facebook.value}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FaInstagramSquare className="text-gray-600 text-2xl" />
+            <FaFacebook className="text-gray-600 text-xl" />
           </Link>
         )}
-        {twitter.value.length > 0 && (
-          <Link href={twitter.value} target="_blank" rel="noopener noreferrer">
-            <FaTwitterSquare className="text-gray-600 text-2xl" />
+        {contact.instagram.value.length > 0 && (
+          <Link
+            href={contact.instagram.value}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagramSquare className="text-gray-600 text-xl" />
+          </Link>
+        )}
+        {contact.twitter.value.length > 0 && (
+          <Link
+            href={contact.twitter.value}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTwitterSquare className="text-gray-600 text-xl" />
           </Link>
         )}
         <div className="flex ml-8 gap-4">
-          {email.value.length > 0 && (
+          {contact.email.value.length > 0 && (
             <Link
-              href={`mailto:${email.value}`}
+              href={`mailto:${contact.email.value}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaEnvelope className="text-gray-600 text-2xl" />
+              <FaEnvelope className="text-gray-600 text-xl" />
             </Link>
           )}
-          {whatsapp.value.length > 0 && (
+          {contact.whatsapp.value.length > 0 && (
             <Link
-              href={whatsapp.value}
+              href={contact.whatsapp.value}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaWhatsappSquare className="text-gray-600 text-2xl" />
+              <FaWhatsappSquare className="text-gray-600 text-xl" />
             </Link>
           )}
         </div>
@@ -97,7 +131,7 @@ const Nav = ({ settings }) => {
           className="hidden sm:block"
           width={300}
           height={40}
-          src={logoImage.value}
+          src={logo.logoImage.value}
           alt="logo"
         />
         <div className="menu__desktop">

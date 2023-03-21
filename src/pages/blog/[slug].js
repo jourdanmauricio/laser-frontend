@@ -18,66 +18,23 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from 'react-share';
-import Footer from '../../common/Footer/Footer';
+import Footer from '@/common/Footer/Footer';
 
 const Slug = ({ post, settings }) => {
-  const logoImage = settings.find((setting) => setting.feature === 'logoImage');
-  const navBgColor = settings.find(
-    (setting) => setting.feature === 'navBgColor'
-  );
-  const navTextColor = settings.find(
-    (setting) => setting.feature === 'navTextColor'
-  );
-  const navHoverColor = settings.find(
-    (setting) => setting.feature === 'navHoverColor'
-  );
-  const navCurrentPageColor = settings.find(
-    (setting) => setting.feature === 'navCurrentPageColor'
-  );
-
-  // FOOTER
-  const footerBgColor = settings.find(
-    (setting) => setting.feature === 'footerBgColor'
-  );
-  const footerTextColor = settings.find(
-    (setting) => setting.feature === 'footerTextColor'
-  );
-  const footerButtonsColor = settings.find(
-    (setting) => setting.feature === 'footerButtonsColor'
-  );
-  const footerButtonsHoverColor = settings.find(
-    (setting) => setting.feature === 'footerButtonsHoverColor'
-  );
-  const footerLinksColor = settings.find(
-    (setting) => setting.feature === 'footerLinksColor'
-  );
-  const footerLinksHoverColor = settings.find(
-    (setting) => setting.feature === 'footerLinksHoverColor'
-  );
-  const footer2BgColor = settings.find(
-    (setting) => setting.feature === 'footer2BgColor'
-  );
-  const footer2TextColor = settings.find(
-    (setting) => setting.feature === 'footer2TextColor'
+  const postPage = settings.filter((setting) => setting.type === 'pageBlog');
+  const pagePost = postPage.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
   );
 
   return (
     <>
       <style jsx global>{`
         :root {
-          --navBgColor: ${navBgColor.value};
-          --navTextColor: ${navTextColor.value};
-          --navHoverColor: ${navHoverColor.value};
-          --navCurrentPageColor: ${navCurrentPageColor.value};
-          // Footer
-          --footerBgColor: ${footerBgColor.value};
-          --footerTextColor: ${footerTextColor.value};
-          --footerButtonsColor: ${footerButtonsColor.value};
-          --footerButtonsHoverColor: ${footerButtonsHoverColor.value};
-          --footerLinksColor: ${footerLinksColor.value};
-          --footerLinksHoverColor: ${footerLinksHoverColor.value};
-          --footer2BgColor: ${footer2BgColor.value};
-          --footer2TextColor: ${footer2TextColor.value};
+          // BLOG PAGE
+          --heroBgColor: ${pagePost.heroBgColor.value};
+          --bgColor: ${pagePost.bgColor.value};
+          --decorationColor: ${pagePost.decorationColor.value};
         }
       `}</style>
 
@@ -102,9 +59,11 @@ const Slug = ({ post, settings }) => {
       />
 
       <Nav settings={settings} />
-      <div className="p-10">
-        <h1 className="title">{post.title} </h1>
-        <div className="mt-10 min-h-[50vh] font-normal text-base border-gray-500 w-full">
+      <section className="bg-bgColor">
+        <div className="relative bg-heroBgColor h-40 flex flex-col justify-center items-center">
+          <h1 className="text-2xl">{post.title}</h1>
+        </div>
+        <div className="min-h-[50vh] font-normal text-base border-gray-500 w-full">
           <div className="float-none md:float-left md:pr-10 md:pb-10">
             <Image
               className="mx-auto"
@@ -120,56 +79,63 @@ const Slug = ({ post, settings }) => {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>
-        <div className="flex gap-4 items-center">
-          <FacebookShareButton
-            // url={`https://hathayogaloberia.com.ar/blog/${post.slug}`}
-            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-            quote={'Dummy text!'}
-            hashtag="#muo"
-          >
-            <FacebookIcon size={32} round />
-          </FacebookShareButton>
+        {/* Share post  */}
+        <div className="p-4">
+          <p>Compartir en redes sociales</p>
+          <div className="mt-2 flex gap-4 items-center">
+            <FacebookShareButton
+              // url={`https://hathayogaloberia.com.ar/blog/${post.slug}`}
+              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+              quote={'Dummy text!'}
+              hashtag="#muo"
+            >
+              <FacebookIcon size={32} round />
+            </FacebookShareButton>
 
-          <TwitterShareButton
-            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-            quote={'Dummy text!'}
-            hashtag="#muo"
-          >
-            <TwitterIcon className="-top-10" size={32} round />
-          </TwitterShareButton>
+            <TwitterShareButton
+              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+              quote={'Dummy text!'}
+              hashtag="#muo"
+            >
+              <TwitterIcon className="-top-10" size={32} round />
+            </TwitterShareButton>
 
-          <EmailShareButton
-            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-            quote={'Dummy text!'}
-            hashtag="#muo"
-          >
-            <EmailIcon size={32} round />
-          </EmailShareButton>
-          <PinterestShareButton
-            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-            quote={'Dummy text!'}
-            hashtag="#muo"
-          >
-            <PinterestIcon size={32} round />
-          </PinterestShareButton>
+            <EmailShareButton
+              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+              quote={'Dummy text!'}
+              hashtag="#muo"
+            >
+              <EmailIcon size={32} round />
+            </EmailShareButton>
+            <PinterestShareButton
+              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+              quote={'Dummy text!'}
+              hashtag="#muo"
+            >
+              <PinterestIcon size={32} round />
+            </PinterestShareButton>
 
-          <TelegramShareButton
-            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-            quote={'Dummy text!'}
-            hashtag="#muo"
-          >
-            <TelegramIcon size={32} round />
-          </TelegramShareButton>
-          <WhatsappShareButton
-            url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-            quote={'Dummy text!'}
-            hashtag="#muo"
-          >
-            <WhatsappIcon size={32} round />
-          </WhatsappShareButton>
+            <TelegramShareButton
+              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+              quote={'Dummy text!'}
+              hashtag="#muo"
+            >
+              <TelegramIcon size={32} round />
+            </TelegramShareButton>
+            <WhatsappShareButton
+              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+              quote={'Dummy text!'}
+              hashtag="#muo"
+            >
+              <WhatsappIcon size={32} round />
+            </WhatsappShareButton>
+          </div>
         </div>
-        <Author post={post} />
-      </div>
+        {/*  Author */}
+        <div className="p-4">
+          <Author post={post} textColor={pagePost.decorationColor} />
+        </div>
+      </section>
       <Footer settings={settings} />
     </>
   );

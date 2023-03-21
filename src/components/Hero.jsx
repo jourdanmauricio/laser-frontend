@@ -1,24 +1,50 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Hero = ({ settings, heroBtn }) => {
-  const heroImage = settings.find((setting) => setting.feature === 'heroImage');
-  const heroText = settings.find((setting) => setting.feature === 'heroText');
-  const heroPosX = settings.find((setting) => setting.feature === 'heroPosX');
-
-  const waveHeroShow = settings.find(
-    (setting) => setting.feature === 'waveHeroShow'
+const Hero = ({ settings }) => {
+  // HERO SECTION
+  const sectionHero = settings.filter((setting) => setting.type === 'hero');
+  const heroSection = sectionHero.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
   );
-  const waveHero = settings.find((setting) => setting.feature === 'waveHero');
+
+  // HERO BTN
+  const buttonHero = settings.filter((setting) => setting.type === 'heroBtn');
+  const heroBtn = buttonHero.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
+  );
 
   return (
     <>
+      <style jsx global>{`
+        :root {
+          // Hero
+          --heroTop: ${heroSection.top.value};
+          --heroOpacity: ${heroSection.opacity.value};
+          --heroBtnTlRadius: ${heroBtn.tlRadius.value};
+          --heroBtnTrRadius: ${heroBtn.trRadius.value};
+          --heroBtnBlRadius: ${heroBtn.blRadius.value};
+          --heroBtnBrRadius: ${heroBtn.brRadius.value};
+          --heroBtnBorder: ${heroBtn.border.value};
+          --heroBtnWidth: ${heroBtn.width.value};
+          --heroBtnHeight: ${heroBtn.height.value};
+          --heroBtnTextColor: ${heroBtn.textColor.value};
+          --heroBtnBgColor: ${heroBtn.bgColor.value};
+          --heroBtnBorderColor: ${heroBtn.borderColor.value};
+          --heroBtnShadow: ${heroBtn.shadow.value};
+          --heroBtnTextColorHover: ${heroBtn.textColorHover.value};
+          --heroBtnBgColorHover: ${heroBtn.bgColorHover.value};
+          --heroBtnBorderColorHover: ${heroBtn.borderColorHover.value};
+        }
+      `}</style>
       <section className="relative w-full h-[85vh]">
         <div className="-z-10">
           <Image
             priority
-            src={heroImage.value}
-            alt={heroImage.feature}
+            src={heroSection.image.value}
+            alt={heroSection.image.feature}
             className="object-cover object-center"
             fill
           />
@@ -27,16 +53,16 @@ const Hero = ({ settings, heroBtn }) => {
 
         <div
           className={`z-10 absolute hero__pos text-center sm:w-max text-md lg:text-lg -translate-y-1/2 sm:translate-y-0 ${
-            heroPosX.value === 'right'
+            heroSection.posX.value === 'right'
               ? 'right-0'
-              : heroPosX.value === 'left'
+              : heroSection.posX.value === 'left'
               ? 'left-0'
               : 'left-1/2 -translate-x-2/4'
           } `}
         >
           <div
             className="relative ql-editor"
-            dangerouslySetInnerHTML={{ __html: heroText.value }}
+            dangerouslySetInnerHTML={{ __html: heroSection.text.value }}
           />
           {heroBtn.show.value === 'true' && (
             <Link
@@ -47,7 +73,7 @@ const Hero = ({ settings, heroBtn }) => {
             </Link>
           )}
         </div>
-        {waveHeroShow.value === 'true' && (
+        {heroSection.waveShow.value === 'true' && (
           <div className="absolute bottom-0 left-0 w-full h-[100px]  overflow-hidden">
             <svg
               viewBox="0 0 500 150"
@@ -55,7 +81,7 @@ const Hero = ({ settings, heroBtn }) => {
               className="h-full w-full"
             >
               <path
-                d={waveHero.value}
+                d={heroSection.wave.value}
                 className="stroke-none fill-aboutBgColor"
               ></path>
             </svg>

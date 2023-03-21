@@ -17,110 +17,85 @@ const Blog = ({ posts, settings }) => {
   const navCurrentPageColor = settings.find(
     (setting) => setting.feature === 'navCurrentPageColor'
   );
-  // FOOTER
-  const footerBgColor = settings.find(
-    (setting) => setting.feature === 'footerBgColor'
-  );
-  const footerTextColor = settings.find(
-    (setting) => setting.feature === 'footerTextColor'
-  );
-  const footerButtonsColor = settings.find(
-    (setting) => setting.feature === 'footerButtonsColor'
-  );
-  const footerButtonsHoverColor = settings.find(
-    (setting) => setting.feature === 'footerButtonsHoverColor'
-  );
-  const footerLinksColor = settings.find(
-    (setting) => setting.feature === 'footerLinksColor'
-  );
-  const footerLinksHoverColor = settings.find(
-    (setting) => setting.feature === 'footerLinksHoverColor'
-  );
-  const footer2BgColor = settings.find(
-    (setting) => setting.feature === 'footer2BgColor'
-  );
-  const footer2TextColor = settings.find(
-    (setting) => setting.feature === 'footer2TextColor'
+
+  const blogPage = settings.filter((setting) => setting.type === 'pageBlog');
+  const pageBlog = blogPage.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
   );
 
   return (
     <>
       <style jsx global>{`
         :root {
-          --navBgColor: ${navBgColor.value};
-          --navTextColor: ${navTextColor.value};
-          --navHoverColor: ${navHoverColor.value};
-          --navCurrentPageColor: ${navCurrentPageColor.value};
-          // Footer
-          --footerBgColor: ${footerBgColor.value};
-          --footerTextColor: ${footerTextColor.value};
-          --footerButtonsColor: ${footerButtonsColor.value};
-          --footerButtonsHoverColor: ${footerButtonsHoverColor.value};
-          --footerLinksColor: ${footerLinksColor.value};
-          --footerLinksHoverColor: ${footerLinksHoverColor.value};
-          --footer2BgColor: ${footer2BgColor.value};
-          --footer2TextColor: ${footer2TextColor.value};
+          // BLOG PAGE
+          --heroBgColor: ${pageBlog.heroBgColor.value};
+          --bgColor: ${pageBlog.bgColor.value};
+          --decorationColor: ${pageBlog.decorationColor.value};
         }
       `}</style>
       <Nav settings={settings} />
-      <div className="bg-blue-100 h-40 flex flex-col justify-center items-center">
-        <h1 className="text-slate-800">Blog, artículos y noticias</h1>
+      <div className="relative bg-heroBgColor flex flex-col justify-center items-center">
+        {/* <h1 className="text-slate-800">Blog, artículos y noticias</h1> */}
+        <div
+          className="relative ql-editor"
+          dangerouslySetInnerHTML={{
+            __html: pageBlog.h1.value,
+          }}
+        />
       </div>
-      <section className="px-4 sm:px-10 text-center text-lg font-medium tracking-wide">
-        <h2 className="title my-6">¡Bienvenida a mi blog!</h2>
-        <p className="mt-4">
-          Aquí encontrarás una variedad de temas interesantes y útiles que te
-          ayudarán a mejorar tu vida y alcanzar tus objetivos. Desde consejos
-          sobre salud y bienestar, hasta artículos sobre tecnología y
-          entretenimiento, mi blog tiene algo para todos.
-        </p>
-        <p className="mt-4">
-          Mis publicaciones están escritas con el objetivo de informar, inspirar
-          y entretener. Me apasiona compartir información valiosa y útil que
-          pueda ayudarte a tomar decisiones informadas y a mejorar tu vida de
-          alguna manera.
-        </p>
-        <p className="mt-4">
-          Además, estoy siempre abierto a sugerencias y comentarios de mis
-          lectores. Si tienes alguna pregunta o tema que te gustaría que cubra
-          en mi blog, no dudes en contactarme.
-        </p>
-        <p className="mt-4">
-          ¡Gracias por visitar mi blog! Espero que disfrutes leyendo mis
-          publicaciones tanto como yo disfruto escribirlas.
-        </p>
-        <div className="flex flex-col gap-10 py-10 px-5 lg:px-40 w-full">
-          {posts.map((post) => (
-            <article
-              key={post.id}
-              className="flex flex-col sm:flex-row sm:gap-5 shadow-lg rounded-lg min-w-[300px] bg-blue-50"
-            >
-              <div className="relative sm:min-w-[250px] min-h-[150px]">
-                <Link href={`/blog/${post.slug}`}>
-                  <Image
-                    fill
-                    className="rounded-tl-lg rounded-bl-lg object-contain overflow-hidden aspect-square"
-                    src={post.image}
-                    alt={post.alt_image}
-                  />
-                </Link>
-              </div>
-              <div className="w-full">
-                <Link href={`/blog/${post.slug}`}>
-                  <h3 className="title">{post.title}</h3>
-                </Link>
-                <p className="text-left line-clamp-2 my-4">{post.resume}</p>
-                <div className="text-center mb-2">
+      <section className="relative overflow-hidden bg-bgColor px-4 pb-10 sm:px-10 text-center text-lg font-medium tracking-wide">
+        <div
+          className="relative ql-editor"
+          dangerouslySetInnerHTML={{
+            __html: pageBlog.text.value,
+          }}
+        />
+
+        <div className="z-10 mt-10 relative w-full bg-blue-50 xl:w-[70%] mx-auto rounded">
+          {posts.map((post, index) => (
+            <div key={post.id}>
+              <article className="min-w-[300px] py-5 px-5">
+                <div
+                  className={`relative sm:min-w-[250px] min-h-[150px] float-none md:pb-10 ${
+                    index % 2 == 0
+                      ? 'md:float-left md:pr-10'
+                      : 'md:float-right md:pl-10'
+                  }`}
+                >
                   <Link href={`/blog/${post.slug}`}>
-                    <strong className="hover:underline text-sm">
-                      Seguir leyendo...
-                    </strong>
+                    <Image
+                      fill
+                      className="object-contain overflow-hidden aspect-square"
+                      src={post.image}
+                      alt={post.alt_image}
+                    />
                   </Link>
                 </div>
-              </div>
-            </article>
+                <div className="w-full">
+                  <Link href={`/blog/${post.slug}`}>
+                    <h3 className="text-lg mt-0 text-left text-bgColor">
+                      {post.title}
+                    </h3>
+                  </Link>
+                  <p className="text-left text-sm line-clamp-2 my-4">
+                    {post.resume}
+                  </p>
+                  <div className="text-center mb-2">
+                    <Link href={`/blog/${post.slug}`}>
+                      <strong className="hover:underline text-sm">
+                        Seguir leyendo...
+                      </strong>
+                    </Link>
+                  </div>
+                </div>
+              </article>
+              <hr />
+            </div>
           ))}
         </div>
+
+        <div className="absolute z-0 w-40 h-40 bg-decorationColor rounded-full -right-10 -bottom-10"></div>
       </section>
       <Footer settings={settings} />
     </>

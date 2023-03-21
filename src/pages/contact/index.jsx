@@ -1,26 +1,13 @@
 import axios from 'axios';
 import Nav from '@/common/Nav';
 import Footer from '@/common/Footer/Footer';
-import {
-  FaEnvelope,
-  FaFacebook,
-  FaInstagramSquare,
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaTwitter,
-  FaWhatsapp,
-} from 'react-icons/fa';
-import Link from 'next/link';
+import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import Spinner from '@/common/Spinner';
 
 const Contact = ({ settings, clinics }) => {
   const [action, setAction] = useState('form');
   const [formMsg, setFormMsg] = useState(null);
-  const facebook = settings.find((setting) => setting.feature === 'facebook');
-  const instagram = settings.find((setting) => setting.feature === 'instagram');
-  const twitter = settings.find((setting) => setting.feature === 'twitter');
-  const whatsapp = settings.find((setting) => setting.feature === 'whatsapp');
   const email = settings.find((setting) => setting.feature === 'email');
   const phone = settings.find((setting) => setting.feature === 'phone');
 
@@ -140,30 +127,12 @@ const Contact = ({ settings, clinics }) => {
   const bodyBgColor = settings.find(
     (setting) => setting.feature === 'bodyBgColor'
   );
-  // FOOTER
-  const footerBgColor = settings.find(
-    (setting) => setting.feature === 'footerBgColor'
+  const contactPage = settings.filter(
+    (setting) => setting.type === 'pageContact'
   );
-  const footerTextColor = settings.find(
-    (setting) => setting.feature === 'footerTextColor'
-  );
-  const footerButtonsColor = settings.find(
-    (setting) => setting.feature === 'footerButtonsColor'
-  );
-  const footerButtonsHoverColor = settings.find(
-    (setting) => setting.feature === 'footerButtonsHoverColor'
-  );
-  const footerLinksColor = settings.find(
-    (setting) => setting.feature === 'footerLinksColor'
-  );
-  const footerLinksHoverColor = settings.find(
-    (setting) => setting.feature === 'footerLinksHoverColor'
-  );
-  const footer2BgColor = settings.find(
-    (setting) => setting.feature === 'footer2BgColor'
-  );
-  const footer2TextColor = settings.find(
-    (setting) => setting.feature === 'footer2TextColor'
+  const pageContact = contactPage.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
   );
 
   return (
@@ -175,53 +144,43 @@ const Contact = ({ settings, clinics }) => {
           --navHoverColor: ${navHoverColor.value};
           --navCurrentPageColor: ${navCurrentPageColor.value};
           --bodyBgColor: ${bodyBgColor.value};
-          // Footer
-          --footerBgColor: ${footerBgColor.value};
-          --footerTextColor: ${footerTextColor.value};
-          --footerButtonsColor: ${footerButtonsColor.value};
-          --footerButtonsHoverColor: ${footerButtonsHoverColor.value};
-          --footerLinksColor: ${footerLinksColor.value};
-          --footerLinksHoverColor: ${footerLinksHoverColor.value};
-          --footer2BgColor: ${footer2BgColor.value};
-          --footer2TextColor: ${footer2TextColor.value};
+          // CONTACT
+          --heroBgColor: ${pageContact.heroBgColor.value};
+          --bgColor: ${pageContact.bgColor.value};
+          --decorationColor: ${pageContact.decorationColor.value};
         }
       `}</style>
       <Nav settings={settings} />
       <div className="overflow-x-hidden">
-        <div className="relative bg-cyan-700 h-40 flex flex-col justify-center items-center">
-          <h1 className="text-white">Contáctanos</h1>
-          <div className="absolute z-0 w-40 h-40 bg-teal-400 rounded-full -right-20 -bottom-28"></div>
+        <div className="relative bg-heroBgColor flex flex-col justify-center items-center">
+          <div
+            className="relative ql-editor"
+            dangerouslySetInnerHTML={{
+              __html: pageContact.h1.value,
+            }}
+          />
+          <div className="absolute z-0 w-40 h-40 bg-decorationColor rounded-full -right-20 -bottom-28"></div>
         </div>
 
         <div className="antialiased bg-gray-100">
           <div className="flex w-full justify-center items-center">
-            <div className="flex flex-col md:flex-row md:space-x-6 md:space-y-0 space-y-6 bg-cyan-700 p-8 sm:p-12  shadow-lg text-white overflow-hidden">
+            <div className="flex flex-col md:flex-row md:space-x-6 md:space-y-0 space-y-6 bg-bgColor p-8 sm:p-12 shadow-lg text-white overflow-hidden">
               <div className="flex flex-col space-y-8 justify-between w-full md:w-1/2">
                 <div className="relative z-10">
-                  <p className="pt-2 text-cyan-100 text-sm">
-                    ¡Hola! Si quieres ponerte en contacto con nosotros, por
-                    favor completa el formulario que encontrarás a continuación.
-                    Nos encantaría escuchar tus comentarios, sugerencias,
-                    preguntas o cualquier otra cosa que desees compartir con
-                    nosotros.
-                  </p>
-                  <p className="pt-2 text-cyan-100 text-sm mt-4">
-                    También puedes enviarnos un correo electrónico o
-                    contactarnos a través de nuestras redes sociales. Te
-                    responderemos lo antes posible.
-                  </p>
-                  <p className="pt-2 text-cyan-100 text-sm mt-4">
-                    Gracias por tu interés en contactarnos, ¡esperamos saber de
-                    ti pronto!
-                  </p>
+                  <div
+                    className="relative ql-editor"
+                    dangerouslySetInnerHTML={{
+                      __html: pageContact.text.value,
+                    }}
+                  />
                 </div>
-                <div className="flex flex-col space-y-6">
+                <div className="flex flex-col text-[16px] space-y-6 px-4">
                   <div className="inline-flex space-x-2 items-center">
-                    <FaPhoneAlt className="text-teal-300 text-xl" />
+                    <FaPhoneAlt className="text-decorationColor" />
                     <span>{phone.value}</span>
                   </div>
                   <div className="inline-flex space-x-2 items-center">
-                    <FaEnvelope className="text-teal-300 text-xl" />
+                    <FaEnvelope className="text-decorationColor" />
                     <span>{email.value}</span>
                   </div>
                   {clinics.map((clinic) => (
@@ -229,56 +188,20 @@ const Contact = ({ settings, clinics }) => {
                       key={clinic.id}
                       className="inline-flex space-x-2 items-center"
                     >
-                      <FaMapMarkerAlt className="text-teal-300 text-xl" />
+                      <FaMapMarkerAlt className="text-decorationColor" />
                       <span>
                         {`${clinic.city}, ${clinic.street} ${clinic.number} 
-                        ${clinic.floor} ${clinic.apartment} - ${clinic.phone}`}
+                        ${clinic.floor || ''} ${clinic.apartment || ''} - ${
+                          clinic.phone
+                        }`}
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="flex space-x-4 text-xl">
-                  {facebook?.value.length > 0 && (
-                    <Link
-                      href={facebook.value}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaFacebook />
-                    </Link>
-                  )}
-                  {twitter?.value.length > 0 && (
-                    <Link
-                      href={twitter.value}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaTwitter />
-                    </Link>
-                  )}
-                  {instagram?.value.length > 0 && (
-                    <Link
-                      href={instagram.value}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaInstagramSquare />
-                    </Link>
-                  )}
-                  {whatsapp?.value.length > 0 && (
-                    <Link
-                      href={whatsapp.value}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaWhatsapp />
-                    </Link>
-                  )}
-                </div>
               </div>
               <div className="relative w-full md:w-1/2 ">
-                <div className="absolute z-0 w-40 h-40 bg-teal-400 rounded-full -left-28 -bottom-16"></div>
-                <div className="relative z-10 h-full bg-white rounded-xl shadow-lg p-8 text-gray-600">
+                <div className="absolute z-0 w-40 h-40 bg-decorationColor rounded-full -left-28 -bottom-16"></div>
+                <div className="relative z-10 h-full bg-blue-50 rounded-xl shadow-lg p-8 text-gray-600">
                   <form
                     onSubmit={handleSubmit}
                     noValidate
@@ -291,7 +214,7 @@ const Contact = ({ settings, clinics }) => {
                             Nombre
                           </label>
                           <input
-                            className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300"
+                            className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-decorationColor"
                             type="text"
                             name="name"
                             title="Ingresa solo letras"
@@ -313,7 +236,7 @@ const Contact = ({ settings, clinics }) => {
                             Email Adrress
                           </label>
                           <input
-                            className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300"
+                            className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-decorationColor"
                             type="email"
                             name="email"
                             autoComplete="on"
@@ -336,7 +259,7 @@ const Contact = ({ settings, clinics }) => {
                             Teléfono
                           </label>
                           <input
-                            className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300"
+                            className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-decorationColor"
                             type="text"
                             title="El teléfono solo admite números, -, +, y ()"
                             name="phone"
@@ -358,7 +281,7 @@ const Contact = ({ settings, clinics }) => {
                             Mensaje
                           </label>
                           <textarea
-                            className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300"
+                            className="ring-1 ring-gray-300 w-full rounded-md mt-2 px-4 py-2 outline-none focus:ring-2 focus:ring-decorationColor"
                             type="text"
                             rows={4}
                             name="comment"
@@ -376,7 +299,7 @@ const Contact = ({ settings, clinics }) => {
                             {error.comment}
                           </span>
                         </div>
-                        <button className="inline-block self-end bg-cyan-700 text-white font-bold rounded-lg px-6 py-2 uppercase text-sm">
+                        <button className="inline-block self-end bg-bgColor text-white font-bold rounded-lg px-6 py-2 uppercase text-sm">
                           Enviar mensaje
                         </button>
                       </>
@@ -385,7 +308,7 @@ const Contact = ({ settings, clinics }) => {
                     {action === 'msg' && (
                       <h3
                         id="form-rta"
-                        className="text-teal-500 text-2xl w-5/6 h-4/6 mx-auto text-center"
+                        className="text-decorationColor text-2xl w-5/6 h-4/6 mx-auto text-center"
                       >
                         {formMsg}
                       </h3>

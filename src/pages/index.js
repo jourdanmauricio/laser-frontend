@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import Hero from '../components/Hero';
 import Blog from '../components/Blog';
 import Clinics from '../components/Clinics/Clinics';
@@ -14,235 +13,50 @@ export default function Home({
   posts,
   clinics,
   settings,
-  sections,
+  services,
   testimonials,
 }) {
-  //  HERO
-  const heroImage = settings.find((setting) => setting.feature === 'heroImage');
-  const heroOpacity = settings.find(
-    (setting) => setting.feature === 'heroOpacity'
+  // LOGO
+  const navLogo = settings.filter((setting) => setting.type === 'logo');
+  const logo = navLogo.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
   );
-  const heroTop = settings.find((setting) => setting.feature === 'heroTop');
-  const navBgColor = settings.find(
-    (setting) => setting.feature === 'navBgColor'
-  );
-  const navTextColor = settings.find(
-    (setting) => setting.feature === 'navTextColor'
-  );
-  const navHoverColor = settings.find(
-    (setting) => setting.feature === 'navHoverColor'
-  );
-  const navCurrentPageColor = settings.find(
-    (setting) => setting.feature === 'navCurrentPageColor'
-  );
+
+  // BODY
   const bodyBgColor = settings.find(
     (setting) => setting.feature === 'bodyBgColor'
   );
 
-  const buttonHero = settings.filter((setting) => setting.type === 'heroBtn');
-  const heroBtn = buttonHero.reduce(
-    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
-    {}
-  );
-
-  // ABOUT
-  const aboutBgColor = settings.find(
-    (setting) => setting.feature === 'aboutBgColor'
-  );
-  const aboutContent = sections.find((section) => section.name === 'about');
-
-  // SERVICES
-  const servicesBgColor = settings.find(
-    (setting) => setting.feature === 'servicesBgColor'
-  );
-  const servicesTextColor = settings.find(
-    (setting) => setting.feature === 'servicesTextColor'
-  );
-  const servicesContent = sections.find(
-    (section) => section.name === 'services'
-  );
-
-  // ENTRADAS
-  const blogBgColor = settings.find(
-    (setting) => setting.feature === 'blogBgColor'
-  );
-  const blogTextColor = settings.find(
-    (setting) => setting.feature === 'blogTextColor'
-  );
-  const blogContent = sections.find((section) => section.name === 'blog');
-
-  // CONSULTORIOS
-  const clinicBgColor = settings.find(
-    (setting) => setting.feature === 'clinicBgColor'
-  );
-  const clinicContent = sections.find((section) => section.name === 'clinic');
-
-  // TESTIMONIALS
-  const testimonialsBgColor = settings.find(
-    (setting) => setting.feature === 'testimonialsBgColor'
-  );
-  const testimonialsTextColor = settings.find(
-    (setting) => setting.feature === 'testimonialsTextColor'
-  );
-
-  const testimonialsContent = sections.find(
-    (section) => section.name === 'testimonials'
-  );
-
-  // FOOTER
-  const footerBgColor = settings.find(
-    (setting) => setting.feature === 'footerBgColor'
-  );
-  const footerTextColor = settings.find(
-    (setting) => setting.feature === 'footerTextColor'
-  );
-  const footerButtonsColor = settings.find(
-    (setting) => setting.feature === 'footerButtonsColor'
-  );
-  const footerButtonsHoverColor = settings.find(
-    (setting) => setting.feature === 'footerButtonsHoverColor'
-  );
-  const footerLinksColor = settings.find(
-    (setting) => setting.feature === 'footerLinksColor'
-  );
-  const footerLinksHoverColor = settings.find(
-    (setting) => setting.feature === 'footerLinksHoverColor'
-  );
-  const footer2BgColor = settings.find(
-    (setting) => setting.feature === 'footer2BgColor'
-  );
-  const footer2TextColor = settings.find(
-    (setting) => setting.feature === 'footer2TextColor'
-  );
-
-  // CLINICBTN
-  const butonclinic = settings.filter(
-    (setting) => setting.type === 'clinicBtn'
-  );
-  const clinicBtn = butonclinic.reduce(
-    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
-    {}
-  );
-
-  const clinicTextColor = settings.find(
-    (setting) => setting.feature === 'clinicTextColor'
-  );
-
-  // BLOGBTN
-  const butonBlog = settings.filter((setting) => setting.type === 'blogBtn');
-  const blogBtn = butonBlog.reduce(
-    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
-    {}
-  );
+  // // SERVICES
+  // const servicesContent = sections.find(
+  //   (section) => section.name === 'services'
+  // );
 
   // METADATA
-  const meta_title = settings.find(
-    (setting) => setting.feature === 'meta_title'
+  const dataMeta = settings.filter((setting) => setting.type === 'metadata');
+  const metadata = dataMeta.reduce(
+    (obj, cur) => ({ ...obj, [cur.feature]: cur }),
+    {}
   );
-
-  const meta_description = settings.find(
-    (setting) => setting.feature === ' meta_description'
-  );
-
-  const meta_canonical = settings.find(
-    (setting) => setting.feature === ' meta_canonical'
-  );
-
-  const meta_url = settings.find((setting) => setting.feature === ' meta_url');
 
   return (
     <>
       <style jsx global>{`
         :root {
-          // Hero
-          --heroTop: ${heroTop.value};
-          --heroOpacity: ${heroOpacity.value};
-          --heroBtnTlRadius: ${heroBtn.tlRadius.value};
-          --heroBtnTrRadius: ${heroBtn.trRadius.value};
-          --heroBtnBlRadius: ${heroBtn.blRadius.value};
-          --heroBtnBrRadius: ${heroBtn.brRadius.value};
-          --heroBtnBorder: ${heroBtn.border.value};
-          --heroBtnWidth: ${heroBtn.width.value};
-          --heroBtnHeight: ${heroBtn.height.value};
-          --heroBtnTextColor: ${heroBtn.textColor.value};
-          --heroBtnBgColor: ${heroBtn.bgColor.value};
-          --heroBtnBorderColor: ${heroBtn.borderColor.value};
-          --heroBtnShadow: ${heroBtn.shadow.value};
-          --heroBtnTextColorHover: ${heroBtn.textColorHover.value};
-          --heroBtnBgColorHover: ${heroBtn.bgColorHover.value};
-          --heroBtnBorderColorHover: ${heroBtn.borderColorHover.value};
-          // Menu
-          --navBgColor: ${navBgColor.value};
-          --navTextColor: ${navTextColor.value};
-          --navHoverColor: ${navHoverColor.value};
-          --navCurrentPageColor: ${navCurrentPageColor.value};
           --bodyBgColor: ${bodyBgColor.value};
-          // About
-          --aboutBgColor: ${aboutBgColor.value};
-          // Service
-          --servicesBgColor: ${servicesBgColor.value};
-          --servicesTextColor: ${servicesTextColor.value};
-          // Entradas
-          --blogBgColor: ${blogBgColor.value};
-          --blogTextColor: ${blogTextColor.value};
-          --blogBtnTlRadius: ${blogBtn.tlRadius.value};
-          --blogBtnTrRadius: ${blogBtn.trRadius.value};
-          --blogBtnBlRadius: ${blogBtn.blRadius.value};
-          --blogBtnBrRadius: ${blogBtn.brRadius.value};
-          --blogBtnBorder: ${blogBtn.border.value};
-          --blogBtnWidth: ${blogBtn.width.value};
-          --blogBtnHeight: ${blogBtn.height.value};
-          --blogBtnTextColor: ${blogBtn.textColor.value};
-          --blogBtnBgColor: ${blogBtn.bgColor.value};
-          --blogBtnBorderColor: ${blogBtn.borderColor.value};
-          --blogBtnShadow: ${blogBtn.shadow.value};
-          --blogBtnTextColorHover: ${blogBtn.textColorHover.value};
-          --blogBtnBgColorHover: ${blogBtn.bgColorHover.value};
-          --blogBtnBorderColorHover: ${blogBtn.borderColorHover.value};
-
-          // Consultorios
-          --clinicBgColor: ${clinicBgColor.value};
-          --clinicTextColor: ${clinicTextColor.value};
-          --clinicBtnTlRadius: ${clinicBtn.tlRadius.value};
-          --clinicBtnTrRadius: ${clinicBtn.trRadius.value};
-          --clinicBtnBlRadius: ${clinicBtn.blRadius.value};
-          --clinicBtnBrRadius: ${clinicBtn.brRadius.value};
-          --clinicBtnBorder: ${clinicBtn.border.value};
-          --clinicBtnWidth: ${clinicBtn.width.value};
-          --clinicBtnHeight: ${clinicBtn.height.value};
-          --clinicBtnTextColor: ${clinicBtn.textColor.value};
-          --clinicBtnBgColor: ${clinicBtn.bgColor.value};
-          --clinicBtnBorderColor: ${clinicBtn.borderColor.value};
-          --clinicBtnShadow: ${clinicBtn.shadow.value};
-          --clinicBtnTextColorHover: ${clinicBtn.textColorHover.value};
-          --clinicBtnBgColorHover: ${clinicBtn.bgColorHover.value};
-          --clinicBtnBorderColorHover: ${clinicBtn.borderColorHover.value};
-
-          // testimonials
-          --testimonialsBgColor: ${testimonialsBgColor.value};
-          --testimonialsTextColor: ${testimonialsTextColor.value};
-
-          // Footer
-          --footerBgColor: ${footerBgColor.value};
-          --footerTextColor: ${footerTextColor.value};
-          --footerButtonsColor: ${footerButtonsColor.value};
-          --footerButtonsHoverColor: ${footerButtonsHoverColor.value};
-          --footerLinksColor: ${footerLinksColor.value};
-          --footerLinksHoverColor: ${footerLinksHoverColor.value};
-          --footer2BgColor: ${footer2BgColor.value};
-          --footer2TextColor: ${footer2TextColor.value};
         }
       `}</style>
       <NextSeo
-        title={meta_title?.value}
-        description={meta_description?.value}
-        canonical={meta_canonical?.value}
+        title={metadata.meta_title?.value}
+        description={metadata.meta_description?.value}
+        canonical={metadata.meta_canonical?.value}
         openGraph={{
           type: 'website',
-          url: `${meta_url?.value}`,
+          url: `${metadata.meta_url?.value}`,
           images: [
             {
-              url: `${heroImage?.value}`,
+              url: `${logo.heroImage?.value}`,
               width: 800,
               height: 600,
               alt: 'Doctora Laura Rodriguez',
@@ -251,26 +65,12 @@ export default function Home({
         }}
       />
       <Nav settings={settings} />
-      <Hero settings={settings} heroBtn={heroBtn} />
-      <About settings={settings} aboutContent={aboutContent} />
-      <Services settings={settings} servicesContent={servicesContent} />
-      <Blog
-        settings={settings}
-        blogBtn={blogBtn}
-        posts={posts}
-        blogContent={blogContent}
-      />
-      <Clinics
-        settings={settings}
-        clinicBtn={clinicBtn}
-        clinics={clinics}
-        clinicContent={clinicContent}
-      />
-      <Testimonials
-        settings={settings}
-        testimonials={testimonials}
-        testimonialsContent={testimonialsContent}
-      />
+      <Hero settings={settings} />
+      <About settings={settings} />
+      <Services settings={settings} services={services} />
+      <Blog settings={settings} posts={posts} />
+      <Clinics settings={settings} clinics={clinics} />
+      <Testimonials settings={settings} testimonials={testimonials} />
       <Footer settings={settings} />
     </>
   );
@@ -287,8 +87,8 @@ export async function getStaticProps() {
     const API_SETTINGS = `${process.env.NEXT_PUBLIC_API_BACKEND}/settings`;
     const responseSettings = await axios(API_SETTINGS);
 
-    const API_SECTIONS = `${process.env.NEXT_PUBLIC_API_BACKEND}/sections`;
-    const responseSections = await axios(API_SECTIONS);
+    const API_SERVICES = `${process.env.NEXT_PUBLIC_API_BACKEND}/services`;
+    const responseServices = await axios(API_SERVICES);
 
     const API_TESTIMONIALS = `${process.env.NEXT_PUBLIC_API_BACKEND}/testimonials`;
     const responseTestimonials = await axios(API_TESTIMONIALS);
@@ -310,7 +110,7 @@ export async function getStaticProps() {
         posts: posts,
         clinics,
         settings: responseSettings.data,
-        sections: responseSections.data,
+        services: responseServices.data,
         testimonials,
       },
     };
