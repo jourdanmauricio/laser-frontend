@@ -37,7 +37,7 @@ const Testimonials = ({ settings, testimonials }) => {
         <div className="grid gap-6 text-center md:grid-cols-3 lg:gap-12 text-testimonialsTextColor">
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className="mb-12 md:mb-0">
-              <h5 className="mb-4 text-xl font-semibold">{testimonial.name}</h5>
+              <h3 className="mb-4 text-xl font-semibold">{testimonial.name}</h3>
               <p className="mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
