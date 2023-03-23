@@ -39,7 +39,7 @@ const Slug = ({ post, settings }) => {
       `}</style>
 
       <NextSeo
-        title={post.title}
+        title={post.title.replace(/(<([^>]+)>)/gi, '')}
         description={post.resume}
         canonical={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
         openGraph={{
