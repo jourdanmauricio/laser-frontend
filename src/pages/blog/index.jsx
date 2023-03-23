@@ -96,7 +96,7 @@ export async function getStaticProps() {
     const API_POSTS = `${process.env.NEXT_PUBLIC_API_BACKEND}/posts`;
     const responsePosts = await axios(API_POSTS);
 
-    const posts = responsePosts.data.sort((a, b) => b.order - a.order);
+    const posts = responsePosts.data.sort((a, b) => a.order - b.order);
 
     const API_SETTINGS = `${process.env.NEXT_PUBLIC_API_BACKEND}/settings`;
     const responseSettings = await axios(API_SETTINGS);

@@ -89,7 +89,7 @@ export async function getStaticProps() {
     const responseTestimonials = await axios(API_TESTIMONIALS);
 
     const posts = responsePosts.data
-      .sort((a, b) => b.order - a.order)
+      .sort((a, b) => a.order - b.order)
       .filter((post) => post.main === true);
 
     const clinics = responseClinics.data
