@@ -61,7 +61,7 @@ const Blog = ({ posts, settings }) => {
                 <div className="w-full">
                   <Link href={`/blog/${post.slug}`}>
                     <h3 className="text-lg mt-0 text-left text-bgColor">
-                      {post.title}
+                      {post.title.replace(/(<([^>]+)>)/gi, '')}
                     </h3>
                   </Link>
                   <p className="text-left text-sm line-clamp-2 my-4">

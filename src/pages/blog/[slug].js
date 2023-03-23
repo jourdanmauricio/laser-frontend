@@ -21,7 +21,7 @@ import {
 import Footer from '@/common/Footer/Footer';
 
 const Slug = ({ post, settings }) => {
-  const postPage = settings.filter((setting) => setting.type === 'pageBlog');
+  const postPage = settings.filter((setting) => setting.type === 'pagePost');
   const pagePost = postPage.reduce(
     (obj, cur) => ({ ...obj, [cur.feature]: cur }),
     {}
