@@ -51,15 +51,15 @@ const Testimonials = ({ settings, testimonials }) => {
               </p>
               <div className="flex gap-4 text-yellow-500 justify-center">
                 {testimonial.stars.split('').map((star, index) => (
-                  <button
+                  <span
                     key={index}
-                    type="button"
-                    onClick={() => onClickStar(index, star)}
+                    // type="button"
+                    // onClick={() => onClickStar(index, star)}
                   >
                     {star == '1' && <FaStar />}
                     {star === '0' && <FaStarHalfAlt />}
                     {star === '2' && <FaRegStar />}
-                  </button>
+                  </span>
                 ))}
               </div>
             </div>
