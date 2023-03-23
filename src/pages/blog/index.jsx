@@ -23,7 +23,6 @@ const Blog = ({ posts, settings }) => {
       `}</style>
       <Nav settings={settings} />
       <div className="relative bg-heroBgColor flex flex-col justify-center items-center">
-        {/* <h1 className="text-slate-800">Blog, artículos y noticias</h1> */}
         <div
           className="relative ql-editor"
           dangerouslySetInnerHTML={{

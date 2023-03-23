@@ -100,12 +100,14 @@ export async function getStaticProps() {
       (a, b) => a.order - b.order
     );
 
+    const services = responseServices.data.sort((a, b) => a.order - b.order);
+
     return {
       props: {
-        posts: posts,
+        posts,
         clinics,
         settings: responseSettings.data,
-        services: responseServices.data,
+        services,
         testimonials,
       },
     };
