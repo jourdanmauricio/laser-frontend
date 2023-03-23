@@ -5,19 +5,6 @@ import Nav from '../../common/Nav';
 import Footer from '../../common/Footer/Footer';
 
 const Blog = ({ posts, settings }) => {
-  const navBgColor = settings.find(
-    (setting) => setting.feature === 'navBgColor'
-  );
-  const navTextColor = settings.find(
-    (setting) => setting.feature === 'navTextColor'
-  );
-  const navHoverColor = settings.find(
-    (setting) => setting.feature === 'navHoverColor'
-  );
-  const navCurrentPageColor = settings.find(
-    (setting) => setting.feature === 'navCurrentPageColor'
-  );
-
   const blogPage = settings.filter((setting) => setting.type === 'pageBlog');
   const pageBlog = blogPage.reduce(
     (obj, cur) => ({ ...obj, [cur.feature]: cur }),
