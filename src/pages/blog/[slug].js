@@ -61,7 +61,10 @@ const Slug = ({ post, settings }) => {
       <Nav settings={settings} />
       <section className="bg-bgColor">
         <div className="relative bg-heroBgColor h-40 flex flex-col justify-center items-center">
-          <h1 className="text-2xl">{post.title}</h1>
+          <div
+            className="relative ql-editor"
+            dangerouslySetInnerHTML={{ __html: post.title }}
+          />
         </div>
         <div className="min-h-[50vh] font-normal text-base border-gray-500 w-full">
           <div className="float-none md:float-left md:pr-10 md:pb-10">
