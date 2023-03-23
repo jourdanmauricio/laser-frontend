@@ -77,6 +77,7 @@ const Nav = ({ settings }) => {
             href={contact.facebook.value}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Seguime en Facebook"
           >
             <FaFacebook className="text-gray-600 text-xl" />
           </Link>
@@ -86,6 +87,7 @@ const Nav = ({ settings }) => {
             href={contact.instagram.value}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Seguime en Intagram"
           >
             <FaInstagramSquare className="text-gray-600 text-xl" />
           </Link>
@@ -95,6 +97,7 @@ const Nav = ({ settings }) => {
             href={contact.twitter.value}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Seguime en Twitter"
           >
             <FaTwitterSquare className="text-gray-600 text-xl" />
           </Link>
@@ -105,6 +108,7 @@ const Nav = ({ settings }) => {
               href={`mailto:${contact.email.value}`}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Enviame un email"
             >
               <FaEnvelope className="text-gray-600 text-xl" />
             </Link>
@@ -114,6 +118,7 @@ const Nav = ({ settings }) => {
               href={contact.whatsapp.value}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Envíame un Whatsapp"
             >
               <FaWhatsappSquare className="text-gray-600 text-xl" />
             </Link>
