@@ -159,6 +159,7 @@ const Footer = ({ settings }) => {
                 href={contact.facebook.value}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Seguime en Facebook"
               >
                 <FaFacebookF className="mx-auto text-footerButtonsColor text-lg active:text-neutral-200" />
               </Link>
@@ -169,6 +170,7 @@ const Footer = ({ settings }) => {
                 href={contact.instagram.value}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Seguime en Intagram"
               >
                 <FaInstagram className="mx-auto text-footerButtonsColor text-lg" />
               </Link>
@@ -179,6 +181,7 @@ const Footer = ({ settings }) => {
                 href={contact.twitter.value}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Seguime en Twitter"
               >
                 <FaTwitter className="mx-auto text-footerButtonsColor text-lg" />
               </Link>
@@ -189,6 +192,7 @@ const Footer = ({ settings }) => {
                 href={contact.whatsapp.value}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Envíame un Whatsapp"
               >
                 <FaWhatsapp className="mx-auto text-footerButtonsColor text-lg" />
               </Link>
