@@ -73,7 +73,9 @@ const Blog = ({ settings, posts }) => {
             </div>
 
             <div className="flex flex-col justify-between w-full">
-              <h3 className="text-center text-2xl font-medium">{post.title}</h3>
+              <h3 className="text-center text-2xl font-medium">
+                {post.title.replace(/(<([^>]+)>)/gi, '')}
+              </h3>
               <p className="text-left line-clamp-2 my-4">{post.resume}</p>
               <Link href={`/blog/${post.slug}`}>
                 <strong className="hover:underline">Ver más</strong>

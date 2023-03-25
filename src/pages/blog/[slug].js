@@ -60,83 +60,85 @@ const Slug = ({ post, settings }) => {
 
       <Nav settings={settings} />
       <section className="bg-bgColor">
-        <div className="relative bg-heroBgColor h-40 flex flex-col justify-center items-center">
+        <div className="relative bg-heroBgColor flex flex-col justify-center items-center">
           <div
             className="relative ql-editor"
             dangerouslySetInnerHTML={{ __html: post.title }}
           />
         </div>
-        <div className="min-h-[50vh] font-normal text-base border-gray-500 w-full">
-          <div className="float-none md:float-left md:pr-10 md:pb-10">
-            <Image
-              className="mx-auto"
-              src={post.image}
-              width={400}
-              height={400}
-              alt={post.alt_image}
+        <div className="p-5 md:p-10">
+          <div className="min-h-[50vh] font-normal text-base border-gray-500 w-full">
+            <div className="float-none md:float-left md:pt-4 md:pl-4 md:pr-10 md:pb-10">
+              <Image
+                className="mx-auto"
+                src={post.image}
+                width={400}
+                height={400}
+                alt={post.alt_image}
+              />
+            </div>
+
+            <div
+              className="relative ql-editor"
+              dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </div>
+          {/* Share post  */}
+          <div className="mt-10">
+            <p>Compartir en redes sociales</p>
+            <div className="mt-2 flex gap-4 items-center">
+              <FacebookShareButton
+                // url={`https://hathayogaloberia.com.ar/blog/${post.slug}`}
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+                quote={'Dummy text!'}
+                hashtag="#muo"
+              >
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
 
-          <div
-            className="relative ql-editor"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-        </div>
-        {/* Share post  */}
-        <div className="p-4">
-          <p>Compartir en redes sociales</p>
-          <div className="mt-2 flex gap-4 items-center">
-            <FacebookShareButton
-              // url={`https://hathayogaloberia.com.ar/blog/${post.slug}`}
-              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-              quote={'Dummy text!'}
-              hashtag="#muo"
-            >
-              <FacebookIcon size={32} round />
-            </FacebookShareButton>
+              <TwitterShareButton
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+                quote={'Dummy text!'}
+                hashtag="#muo"
+              >
+                <TwitterIcon className="-top-10" size={32} round />
+              </TwitterShareButton>
 
-            <TwitterShareButton
-              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-              quote={'Dummy text!'}
-              hashtag="#muo"
-            >
-              <TwitterIcon className="-top-10" size={32} round />
-            </TwitterShareButton>
+              <EmailShareButton
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+                quote={'Dummy text!'}
+                hashtag="#muo"
+              >
+                <EmailIcon size={32} round />
+              </EmailShareButton>
+              <PinterestShareButton
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+                quote={'Dummy text!'}
+                hashtag="#muo"
+              >
+                <PinterestIcon size={32} round />
+              </PinterestShareButton>
 
-            <EmailShareButton
-              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-              quote={'Dummy text!'}
-              hashtag="#muo"
-            >
-              <EmailIcon size={32} round />
-            </EmailShareButton>
-            <PinterestShareButton
-              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-              quote={'Dummy text!'}
-              hashtag="#muo"
-            >
-              <PinterestIcon size={32} round />
-            </PinterestShareButton>
-
-            <TelegramShareButton
-              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-              quote={'Dummy text!'}
-              hashtag="#muo"
-            >
-              <TelegramIcon size={32} round />
-            </TelegramShareButton>
-            <WhatsappShareButton
-              url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
-              quote={'Dummy text!'}
-              hashtag="#muo"
-            >
-              <WhatsappIcon size={32} round />
-            </WhatsappShareButton>
+              <TelegramShareButton
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+                quote={'Dummy text!'}
+                hashtag="#muo"
+              >
+                <TelegramIcon size={32} round />
+              </TelegramShareButton>
+              <WhatsappShareButton
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/blog/${post.slug}`}
+                quote={'Dummy text!'}
+                hashtag="#muo"
+              >
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+            </div>
           </div>
-        </div>
-        {/*  Author */}
-        <div className="p-4">
-          <Author post={post} textColor={pagePost.decorationColor} />
+          {/*  Author */}
+          <div className="mt-10 md:px-10 pb-10">
+            <Author post={post} textColor={pagePost.decorationColor} />
+          </div>
         </div>
       </section>
       <Footer settings={settings} />
