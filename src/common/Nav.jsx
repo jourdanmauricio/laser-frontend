@@ -200,10 +200,13 @@ const Nav = ({ settings }) => {
           </ul>
         </div>
 
-        <button className="text-navTextColor p-2 hover:text-navHoverColor">
+        <Link
+          className="text-navTextColor p-2 hover:text-navHoverColor"
+          href="/contact"
+        >
           <p>Solicitar</p>
           <p>consulta</p>
-        </button>
+        </Link>
 
         <div className={`menu__mobile ${isOpenMenu ? 'block' : 'hidden'}`}>
           <ul className="menu__ul-mobile">
@@ -217,6 +220,18 @@ const Nav = ({ settings }) => {
                 Inicio
               </Link>
             </li>
+
+            <li className="menu__link-mobile">
+              <Link
+                className="menu__mobile-item"
+                href="/#nosotros"
+                scroll={false}
+                data-scroll-spy
+              >
+                Sobre mí
+              </Link>
+            </li>
+
             <li className="menu__link-mobile">
               <Link
                 className="menu__mobile-item"
@@ -230,17 +245,17 @@ const Nav = ({ settings }) => {
             <li className="menu__link-mobile">
               <Link
                 className="menu__mobile-item"
-                href="/#lessons"
+                href="/blog"
                 scroll={false}
                 data-scroll-spy
               >
-                Horarios
+                Blog
               </Link>
             </li>
             <li className="menu__link-mobile">
               <Link
                 className="menu__mobile-item"
-                href="/#contact"
+                href="/contact"
                 scroll={false}
                 data-scroll-spy
               >

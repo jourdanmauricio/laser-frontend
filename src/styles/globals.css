@@ -220,7 +220,7 @@ a {
     @apply block px-2 py-1 text-navTextColor hover:text-navHoverColor;
   }
   .menu__mobile {
-    @apply absolute top-[45px] left-0 w-[50%] bg-slate-200 -z-10;
+    @apply absolute top-[72px] left-0 w-[50%] bg-navBgColor -z-10;
   }
   .menu__ul-mobile {
     @apply min-h-screen justify-between px-0 list-none;
